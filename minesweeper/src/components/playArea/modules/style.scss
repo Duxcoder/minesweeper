@@ -1,0 +1,111 @@
+@import "../../../style/media.scss";
+
+.play-area {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  margin: 0 auto;
+  background: #fafafa;
+  border: 2px solid #f3f3f3;
+  border-radius: 20px;
+  padding: 20px;
+  width: fit-content;
+  gap: 1px;
+  &.simple {
+    grid-template-columns: repeat(10, clamp(36px, 3.5vw, 48px));
+    grid-template-rows: repeat(10, clamp(36px, 3.5vw, 48px));
+    @include _990 {
+      grid-template-columns: repeat(10, clamp(24px, 5vw, 36px));
+      grid-template-rows: repeat(10, clamp(24px, 5vw, 36px));
+    }
+  }
+}
+
+.cell {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  font-family: "Jockey One";
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(16px, 3vw, 28px);
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  transition: 0.3s;
+  &.close {
+    background: radial-gradient(50% 50% at 50% 50%, #5c7784 0%, #567a8b 100%);
+  }
+  &.close {
+    @for $i from 0 to 25 {
+      $count: 2 * $i + 1;
+      &.row-#{$count}:nth-child(odd) {
+        background: radial-gradient(
+          50% 50% at 50% 50%,
+          #485e68 0%,
+          #446170 100%
+        );
+      }
+      $count: 2 * $i;
+      &.row-#{$count}:nth-child(even) {
+        background: radial-gradient(
+          50% 50% at 50% 50%,
+          #485e68 0%,
+          #446170 100%
+        );
+      }
+    }
+  }
+  &.close:hover {
+    transform: scale(0.92);
+  }
+  &.close:hover::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #ccc;
+    opacity: 0.1;
+  }
+  &.open {
+    background: linear-gradient(140deg, #d0d0d0 0%, #cccccc 100%);
+  }
+  &.bomb {
+    background: rgb(238 58 39);
+    box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.25);
+  }
+  & .cell-bomb {
+    width: 70%;
+    height: 70%;
+    padding-left: 14%;
+    filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.25));
+    transform: rotate(0.11deg);
+  }
+  &.close.flag {
+    z-index: 1;
+  }
+  &.close.flag::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -24%;
+    width: 86%;
+    height: 86%;
+    background-image: url('../assets/img/flag.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    z-index: 1;
+    filter: saturate(120%);
+    pointer-events: none;
+    transform: rotate(15.47deg);
+  }
+  &.close.flag:hover {
+    transform: scale(1);
+    z-index: 1;
+  }
+}
+
+/* 15*15 - 40 */
+/* 25*25 - 99 */
