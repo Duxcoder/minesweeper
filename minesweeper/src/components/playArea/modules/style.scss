@@ -1,5 +1,10 @@
 @import "../../../style/media.scss";
 
+:root {
+  --row: 10;
+  --column: 10;
+}
+
 .play-area {
   display: grid;
   justify-items: center;
@@ -11,13 +16,11 @@
   padding: 20px;
   width: fit-content;
   gap: 1px;
-  &.simple {
-    grid-template-columns: repeat(10, clamp(36px, 3.5vw, 48px));
-    grid-template-rows: repeat(10, clamp(36px, 3.5vw, 48px));
-    @include _990 {
-      grid-template-columns: repeat(10, clamp(24px, 5vw, 36px));
-      grid-template-rows: repeat(10, clamp(24px, 5vw, 36px));
-    }
+  grid-template-columns: repeat(var(--column), clamp(36px, 3.5vw, 48px));
+  grid-template-rows: repeat(var(--row), clamp(36px, 3.5vw, 48px));
+  @include _990 {
+    grid-template-columns: repeat(var(--column), clamp(24px, 5vw, 36px));
+    grid-template-rows: repeat(var(--row), clamp(24px, 5vw, 36px));
   }
 }
 
@@ -34,29 +37,13 @@
   height: 100%;
   cursor: pointer;
   transition: 0.3s;
-  &.close {
+  &.light {
     background: radial-gradient(50% 50% at 50% 50%, #5c7784 0%, #567a8b 100%);
   }
-  &.close {
-    @for $i from 0 to 25 {
-      $count: 2 * $i + 1;
-      &.row-#{$count}:nth-child(odd) {
-        background: radial-gradient(
-          50% 50% at 50% 50%,
-          #485e68 0%,
-          #446170 100%
-        );
-      }
-      $count: 2 * $i;
-      &.row-#{$count}:nth-child(even) {
-        background: radial-gradient(
-          50% 50% at 50% 50%,
-          #485e68 0%,
-          #446170 100%
-        );
-      }
-    }
+  &.dark {
+    background: radial-gradient(50% 50% at 50% 50%, #485e68 0%, #446170 100%);
   }
+
   &.close:hover {
     transform: scale(0.92);
   }
@@ -72,32 +59,32 @@
     background: linear-gradient(140deg, #d0d0d0 0%, #cccccc 100%);
   }
   &.bomb {
-    background: rgb(238 58 39);
+    background: rgb(255 59 38);
     box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.25);
   }
   & .cell-bomb {
     width: 70%;
     height: 70%;
     padding-left: 14%;
-    filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.25));
+    filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.25)) saturate(200%);
     transform: rotate(0.11deg);
   }
   &.close.flag {
     z-index: 1;
   }
   &.close.flag::before {
-    content: '';
+    content: "";
     position: absolute;
     top: -20%;
     right: -24%;
     width: 86%;
     height: 86%;
-    background-image: url('../assets/img/flag.png');
+    background-image: url("../assets/img/flag.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
     z-index: 1;
-    filter: saturate(120%);
+    filter: saturate(130%);
     pointer-events: none;
     transform: rotate(15.47deg);
   }

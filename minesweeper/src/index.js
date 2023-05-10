@@ -1,6 +1,6 @@
 import './index.html';
 import './style/style.scss';
-// import Manager from './components/app';
-import renderPlayArea from './components/playArea/modules/renderPlayArea';
+import Manager from './components/app';
 
-renderPlayArea();
+const manager = new Manager();
+manager.startGame();
