@@ -1,14 +1,15 @@
-import PlayArea from './playArea/modules/playArea';
-import RenderPlayArea from './playArea/modules/renderPlayArea';
+import PlayArea from './playArea/playArea';
+import Options from './options';
+// import RenderPlayArea from './playArea/modules/renderPlayArea';
 
 export default class Manager {
-  constructor(username, theme) {
-    this.username = username;
-    this.theme = theme;
-    this.areaData = new PlayArea();
+  constructor() {
+    this.area = new PlayArea();
+    this.options = new Options();
   }
 
   startGame() {
+    this.options.setAreaData();
     // this.renderHead();
     // this.renderDescriptionPanel()
     // this.renderScorePanel()
@@ -29,16 +30,7 @@ export default class Manager {
   // }
 
   playArea() {
-    const { body } = document;
-    const options = {
-      container: body,
-      areaData: {
-        row: 10,
-        column: 10,
-      },
-    };
-    this.$renderArea = new RenderPlayArea(options);
-    this.$renderArea.renderPlayArea();
+    this.area.startPlayArea(this.options.areaData);
     // FUNCTIONALITY
   }
 

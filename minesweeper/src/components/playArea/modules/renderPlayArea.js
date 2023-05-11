@@ -2,10 +2,14 @@ import bomb from '../../../assets/img/bomb.png';
 import Cell from './cell';
 
 export default class RenderPlayArea {
-  constructor({ container, areaData }) {
+  constructor({ container, data }, area) {
     this.container = container;
-    this.row = areaData.row;
-    this.column = areaData.column;
+    this.area = area;
+    this.row = data.row;
+    this.column = data.column;
+    this.$area = null;
+    this.cells = null;
+    this.$cells = null;
   }
 
   renderPlayArea() {
@@ -21,6 +25,8 @@ export default class RenderPlayArea {
     const cellBomb = document.querySelector('.bomb');
     img.classList.add('cell-bomb');
     cellBomb.append(img);
+    this.$area = $area;
+    return $area;
   }
 
   updateRender() {
@@ -29,22 +35,23 @@ export default class RenderPlayArea {
 
   renderCells(container) {
     const $cells = [];
-    for (let r = 0; r < this.row; r += 1) {
-      for (let c = 0; c < this.column; c += 1) {
-        const options = {
-          open: false,
-          dark: ((r % 2) && ((c + 1) % 2)) || (((r + 1) % 2) && ((c) % 2)),
-          row: r + 1,
-          column: c + 1,
-        };
-        const cell = new Cell(options);
-        const $cell = cell.createDomCell();
-        console.log(options.dark);
-        $cells.push($cell);
-        container.append($cell);
-      }
-    }
+    const cells = this.area.map((rowArea, r) => rowArea.map((cell, c) => { // r - row; c - column
+      const options = {
+        open: false,
+        dark: ((r % 2) && ((c + 1) % 2)) || (((r + 1) % 2) && ((c) % 2)),
+        row: r + 1,
+        column: c + 1,
+        number: cell,
+      };
+      const cellClass = new Cell(options);
+      const $cell = cellClass.createDomCell();
+      $cells.push($cell);
+      container.append($cell);
+      return cellClass;
+    }));
     this.$cells = $cells;
+    this.cells = cells;
+    console.log(cells);
     return $cells;
   }
 }

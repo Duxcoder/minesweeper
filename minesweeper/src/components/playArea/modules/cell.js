@@ -6,13 +6,12 @@ const defOptions = {
   number: null,
   row: null,
   column: null,
-  defColor: '#000',
 };
 const colorsNumbers = ['#46616F', '#59A834', '#34B4BC', '#A934BC', '#6D17DA', '#BC3434', '#E48B21', '#000000'];
 
 export default class Cell {
   constructor({
-    flag, bomb, open, dark, number, row, column, defColor,
+    flag, bomb, open, dark, number, row, column,
   } = defOptions) {
     this.flag = flag;
     this.bomb = bomb;
@@ -21,18 +20,27 @@ export default class Cell {
     this.number = number;
     this.row = row;
     this.column = column;
-    this.defColor = defColor;
     this.$cell = null;
+  }
+
+  updateCell() {
+    if (this.$cell.classList.contains('close')) {
+      this.$cell.classList.remove('close');
+      this.$cell.classList.add('open');
+    }
   }
 
   createDomCell() {
     const $div = document.createElement('div');
     $div.classList.add('cell');
-    $div.classList.add(this.flag ? 'flag' : '1');
-    $div.classList.add(this.bomb ? 'bomb' : '2');
-    $div.classList.add(!this.open ? 'close' : '3');
+    $div.classList.add(this.flag ? 'flag' : null);
+    $div.classList.add(this.bomb && this.open ? 'bomb' : null);
+    $div.classList.add(!this.open ? 'close' : 'open');
     $div.classList.add(this.dark ? 'dark' : 'light');
-    $div.style.color = this.number ? this.findColor() : this.defColor;
+    if (this.number && !this.open) {
+      $div.style.color = this.findColor();
+      $div.textContent = this.number;
+    }
     this.$cell = $div;
     return $div;
   }
@@ -47,19 +55,3 @@ export default class Cell {
     return col;
   }
 }
-
-// export default class Cell {
-//   constructor({
-//     flag = null,
-//     bomb = null,
-//     open = false,
-//     dark = false,
-//     number = null,
-//   }) {
-//     this.flag = flag;
-//     this.bomb = bomb;
-//     this.open = open;
-//     this.dark = dark;
-//     this.number = number;
-//   }
-// }
