@@ -5,7 +5,7 @@ export default class Options {
     this.areaData = null;
   }
 
-  setAreaData(rowCells = 10, columnCells = 10, countBombs = 20) {
+  setAreaData(rowCells = 10, columnCells = 10, countBombs = 12) {
     const { body } = document;
     const options = {
       container: body,

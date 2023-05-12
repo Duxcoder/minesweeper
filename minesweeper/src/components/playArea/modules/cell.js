@@ -3,7 +3,7 @@ const defOptions = {
   bomb: null,
   open: false,
   dark: false,
-  number: null,
+  number: 0,
   row: null,
   column: null,
 };
@@ -24,9 +24,13 @@ export default class Cell {
   }
 
   updateCell() {
-    if (this.$cell.classList.contains('close')) {
+    if (this.open) {
       this.$cell.classList.remove('close');
       this.$cell.classList.add('open');
+    }
+    if (this.number && this.open) { // && this.open
+      this.$cell.style.color = this.findColor();
+      this.$cell.textContent = this.number;
     }
   }
 
@@ -34,7 +38,7 @@ export default class Cell {
     const $div = document.createElement('div');
     $div.classList.add('cell');
     $div.classList.add(this.flag ? 'flag' : null);
-    $div.classList.add(this.bomb && this.open ? 'bomb' : null);
+    $div.classList.add(this.bomb && !this.open ? 'bomb' : null);
     $div.classList.add(!this.open ? 'close' : 'open');
     $div.classList.add(this.dark ? 'dark' : 'light');
     if (this.number && !this.open) {

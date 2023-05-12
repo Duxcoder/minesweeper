@@ -12,18 +12,25 @@
 export default class EventsArea {
   constructor() {
     this.$area = null;
+    this.cells = null;
+    this.firstClickCellPosition = null;
   }
 
-  firstClickOnArea($area, renderAreaClass, createBombs) {
+  firstClickOnArea($area, renderAreaClass, callback) {
     this.$area = $area;
     const handler = (e) => {
       renderAreaClass.$cells.forEach(($cell, i) => {
         if (e.target === $cell) {
           const { cells } = renderAreaClass;
+          this.cells = cells;
           const indexRow = Math.floor(i / cells.length);
           const indexColumn = Math.floor((i % cells[0].length));
-          renderAreaClass.cells[indexRow][indexColumn].updateCell();
-          createBombs();
+          const cell = renderAreaClass.cells[indexRow][indexColumn];
+          this.firstClickCellPosition = [indexRow, indexColumn];
+          cell.open = true;
+          cell.updateCell();
+          callback([this.firstClickCellPosition]);
+          this.openCellsAround(renderAreaClass);
           $area.removeEventListener('click', handler);
         }
       });
@@ -31,6 +38,36 @@ export default class EventsArea {
     $area.addEventListener('click', handler);
   }
 
+  openCellsAround(renderAreaClass, cellPositions = this.firstClickCellPosition) {
+    const correctivePositionRowColumn = [
+      [-1, -1],
+      [-1, 0],
+      [-1, +1],
+      [0, -1],
+      [0, +1],
+      [+1, -1],
+      [+1, 0],
+      [+1, +1],
+    ];
+    console.log(correctivePositionRowColumn);
+    const [row, column] = cellPositions;
+    if (!renderAreaClass.cells[row][column].number) {
+      for (let i = 0; i < correctivePositionRowColumn.length; i += 1) {
+        const [correctiveRow, correctiveColumn] = correctivePositionRowColumn[i];
+        const correctRow = correctiveRow + row;
+        const correctColumn = correctiveColumn + column;
+        if (renderAreaClass.cells[correctRow] && renderAreaClass.cells[correctRow][correctColumn]
+          && !renderAreaClass.cells[correctRow][correctColumn].open) {
+          const aroundCell = renderAreaClass.cells[correctRow][correctColumn];
+          if (!aroundCell.bomb && !renderAreaClass.cells[row][column].number) {
+            aroundCell.open = true;
+            aroundCell.updateCell();
+            this.openCellsAround(renderAreaClass, [correctRow, correctColumn]);
+          }
+        }
+      }
+    }
+  }
   // createBombs(areaCells, countBombs, exception = false) {
   //   const area = areaCells;
   //   let count = 0;

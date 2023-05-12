@@ -9,7 +9,7 @@ const isExceptions = (exception, randRow, randColumn) => {
   if (!exception) return false;
   return exception.some((cellException) => {
     const [cellRowException, cellColumnException] = cellException;
-    return (cellRowException - 1 === randRow && cellColumnException - 1 === randColumn);
+    return (cellRowException === randRow && cellColumnException === randColumn);
   });
 };
 
@@ -43,14 +43,16 @@ export default class PlayArea {
   }
 
   startEvents($area, options) {
-    this.events.firstClickOnArea($area, this.renderAreaClass, () => {
-      this.createBombs(this.renderAreaClass.cells, options.bombs);
-      // this.plusOneAroundBomb(this.renderAreaClass.cells);
+    this.events.firstClickOnArea($area, this.renderAreaClass, (exceptions) => {
+      const bombs = this.createBombs(this.renderAreaClass.cells, options.bombs, exceptions);
+      this.plusOneAroundBomb(this.renderAreaClass.cells, bombs);
     });
   }
 
   createBombs(areaCells, countBombs, exception = false) {
+    console.log(exception);
     const area = areaCells;
+    const cellsBombs = [];
     let count = 0;
     let randRow;
     let randColumn;
@@ -62,35 +64,40 @@ export default class PlayArea {
         if (!cell.bomb) {
           count += 1;
           cell.bomb = true;
+          cellsBombs.push([randRow, randColumn]);
         }
       }
     }
     this.area = area;
-    return area;
+    return cellsBombs;
   }
 
-  // plusOneAroundBomb(cells, bombsArr) {
-  //   const newCells = cells;
-  //   newCells.plusOne = function plusOne(row, column) {
-  //     const cell = this[row][column];
-  //     const isBomb = bombsArr.find((bombCell) => {
-  //       const [bombRow, bombColumn] = bombCell;
-  //       return (bombRow === row && bombColumn === column);
-  //     });
-  //     if (isBomb) return;
-  //     return this[row][column] += 1;
-  //   };
-  //   bombsArr.forEach((bombCell) => {
-  //     const [bombRow, bombColumn] = bombCell;
-  //     newCells.plusOne(bombRow - 1, bombColumn - 1);
-  //     newCells.plusOne(bombRow - 1, bombColumn);
-  //     newCells.plusOne(bombRow - 1, bombColumn + 1);
-  //     newCells.plusOne(bombRow, bombColumn - 1);
-  //     newCells.plusOne(bombRow, bombColumn + 1);
-  //     newCells.plusOne(bombRow + 1, bombColumn - 1);
-  //     newCells.plusOne(bombRow + 1, bombColumn);
-  //     newCells.plusOne(bombRow + 1, bombColumn + 1);
-  //   });
-  //   return newCells;
-  // }
+  plusOneAroundBomb(cells, bombsArr) {
+    const newCells = cells;
+    newCells.plusOne = function plusOne(row, column) {
+      // const cell = this[row][column];
+      const isBomb = bombsArr.find((bombCell) => {
+        const [bombRow, bombColumn] = bombCell;
+        return (bombRow === row && bombColumn === column);
+      });
+      if (isBomb) return;
+      if (this[row] && this[row][column]) {
+        this[row][column].number += 1;
+        this[row][column].updateCell();
+      }
+    };
+    bombsArr.forEach((bombCell) => {
+      const [bombRow, bombColumn] = bombCell;
+      newCells.plusOne(bombRow - 1, bombColumn - 1);
+      newCells.plusOne(bombRow - 1, bombColumn);
+      newCells.plusOne(bombRow - 1, bombColumn + 1);
+      newCells.plusOne(bombRow, bombColumn - 1);
+      newCells.plusOne(bombRow, bombColumn + 1);
+      newCells.plusOne(bombRow + 1, bombColumn - 1);
+      newCells.plusOne(bombRow + 1, bombColumn);
+      newCells.plusOne(bombRow + 1, bombColumn + 1);
+    });
+    this.area = newCells;
+    return newCells;
+  }
 }
