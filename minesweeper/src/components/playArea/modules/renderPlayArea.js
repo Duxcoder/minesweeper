@@ -1,4 +1,3 @@
-import bomb from '../../../assets/img/bomb.png';
 import Cell from './cell';
 
 export default class RenderPlayArea {
@@ -20,11 +19,6 @@ export default class RenderPlayArea {
     $area.classList.add('play-area');
     $container.append($area);
     this.renderCells($area);
-    const img = new Image();
-    img.src = bomb;
-    const cellBomb = document.querySelector('.bomb');
-    img.classList.add('cell-bomb');
-    cellBomb.append(img);
     this.$area = $area;
     return $area;
   }

@@ -1,3 +1,8 @@
+function getRandomNum(from, to) {
+  const rand = from + Math.random() * (to + 1 - from);
+  return Math.floor(rand);
+}
+
 // function getRandomNum(from, to) {
 //   const rand = from + Math.random() * (to + 1 - from);
 //   return Math.floor(rand);
@@ -49,7 +54,6 @@ export default class EventsArea {
       [+1, 0],
       [+1, +1],
     ];
-    console.log(correctivePositionRowColumn);
     const [row, column] = cellPositions;
     if (!renderAreaClass.cells[row][column].number) {
       for (let i = 0; i < correctivePositionRowColumn.length; i += 1) {
@@ -67,6 +71,37 @@ export default class EventsArea {
         }
       }
     }
+  }
+
+  clickTracking($area, renderAreaClass) {
+    const { cells } = renderAreaClass;
+    const totalArrayCells = cells.reduce((arr, row) => [...arr, ...row], []);
+    console.log(totalArrayCells);
+    const bombs = totalArrayCells.filter((cell) => cell.bomb);
+    const handler = (e) => {
+      totalArrayCells.forEach((cell) => {
+        const cellElem = cell;
+        const { $cell } = cell;
+        if (e.target === $cell) {
+          cellElem.open = true;
+          cellElem.updateCell();
+          if (cellElem.bomb) {
+            bombs.forEach((bomb) => {
+              const second = getRandomNum(1, 10);
+              if (cellElem !== bomb) {
+                setTimeout(() => {
+                  const bombElem = bomb;
+                  bombElem.open = true;
+                  bombElem.updateCell();
+                }, second * 100);
+              }
+            });
+          }
+        }
+      });
+    };
+    $area.addEventListener('click', handler);
+    this.$area = $area;
   }
   // createBombs(areaCells, countBombs, exception = false) {
   //   const area = areaCells;

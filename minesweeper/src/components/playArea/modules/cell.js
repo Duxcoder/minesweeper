@@ -1,6 +1,10 @@
+import bombImg from '../../../assets/img/bomb.png';
+import boom from '../../../assets/audio/boom.mp3';
+
 const defOptions = {
   flag: null,
   bomb: null,
+  explosion: false,
   open: false,
   dark: false,
   number: 0,
@@ -11,10 +15,11 @@ const colorsNumbers = ['#46616F', '#59A834', '#34B4BC', '#A934BC', '#6D17DA', '#
 
 export default class Cell {
   constructor({
-    flag, bomb, open, dark, number, row, column,
+    flag, bomb, explosion, open, dark, number, row, column,
   } = defOptions) {
     this.flag = flag;
     this.bomb = bomb;
+    this.explosion = explosion;
     this.open = open;
     this.dark = dark;
     this.number = number;
@@ -32,6 +37,20 @@ export default class Cell {
       this.$cell.style.color = this.findColor();
       this.$cell.textContent = this.number;
     }
+    if (this.bomb && this.open && !this.explosion) {
+      this.explosion = true;
+      this.explosionBomb();
+    }
+  }
+
+  explosionBomb() {
+    this.$cell.classList.add('bomb');
+    const img = new Image();
+    img.src = bombImg;
+    img.classList.add('cell-bomb');
+    this.$cell.append(img);
+    const audio = new Audio(boom);
+    audio.play();
   }
 
   createDomCell() {

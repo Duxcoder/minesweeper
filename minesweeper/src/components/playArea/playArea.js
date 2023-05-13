@@ -46,6 +46,7 @@ export default class PlayArea {
     this.events.firstClickOnArea($area, this.renderAreaClass, (exceptions) => {
       const bombs = this.createBombs(this.renderAreaClass.cells, options.bombs, exceptions);
       this.plusOneAroundBomb(this.renderAreaClass.cells, bombs);
+      this.events.clickTracking($area, this.renderAreaClass);
     });
   }
 
