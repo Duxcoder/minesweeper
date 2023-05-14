@@ -7,109 +7,37 @@
     <title>Minesweeper</title>
   </head>
   <body>
-    <div class="container">
-      <section class="play-area simple">
-        <div class="cell open row-1">1</div>
-        <div class="cell open row-1"></div>
-        <div class="cell bomb row-1"></div>
-        <div class="cell close row-1"></div>
-        <div class="cell close flag row-1"></div>
-        <div class="cell close row-1"></div>
-        <div class="cell close row-1"></div>
-        <div class="cell close row-1"></div>
-        <div class="cell close row-1"></div>
-        <div class="cell close row-1"></div>
-        <div class="cell close row-2"></div>
-        <div class="cell close row-2"></div>
-        <div class="cell close row-2"></div>
-        <div class="cell close row-2"></div>
-        <div class="cell close row-2"></div>
-        <div class="cell close row-2"></div>
-        <div class="cell close row-2"></div>
-        <div class="cell close row-2"></div>
-        <div class="cell close row-2"></div>
-        <div class="cell close row-2"></div>
-        <div class="cell close row-3"></div>
-        <div class="cell close row-3"></div>
-        <div class="cell close row-3"></div>
-        <div class="cell close row-3"></div>
-        <div class="cell close row-3"></div>
-        <div class="cell close row-3"></div>
-        <div class="cell close row-3"></div>
-        <div class="cell close row-3"></div>
-        <div class="cell close row-3"></div>
-        <div class="cell close row-3"></div>
-        <div class="cell close row-4"></div>
-        <div class="cell close row-4"></div>
-        <div class="cell close row-4"></div>
-        <div class="cell close row-4"></div>
-        <div class="cell close row-4"></div>
-        <div class="cell close row-4"></div>
-        <div class="cell close row-4"></div>
-        <div class="cell close row-4"></div>
-        <div class="cell close row-4"></div>
-        <div class="cell close row-4"></div>
-        <div class="cell close row-5"></div>
-        <div class="cell close row-5"></div>
-        <div class="cell close row-5"></div>
-        <div class="cell close row-5"></div>
-        <div class="cell close row-5"></div>
-        <div class="cell close row-5"></div>
-        <div class="cell close row-5"></div>
-        <div class="cell close row-5"></div>
-        <div class="cell close row-5"></div>
-        <div class="cell close row-5"></div>
-        <div class="cell close row-6"></div>
-        <div class="cell close row-6"></div>
-        <div class="cell close row-6"></div>
-        <div class="cell close row-6"></div>
-        <div class="cell close row-6"></div>
-        <div class="cell close row-6"></div>
-        <div class="cell close row-6"></div>
-        <div class="cell close row-6"></div>
-        <div class="cell close row-6"></div>
-        <div class="cell close row-6"></div>
-        <div class="cell close row-7"></div>
-        <div class="cell close row-7"></div>
-        <div class="cell close row-7"></div>
-        <div class="cell close row-7"></div>
-        <div class="cell close row-7"></div>
-        <div class="cell close row-7"></div>
-        <div class="cell close row-7"></div>
-        <div class="cell close row-7"></div>
-        <div class="cell close row-7"></div>
-        <div class="cell close row-7"></div>
-        <div class="cell close row-8"></div>
-        <div class="cell close row-8"></div>
-        <div class="cell close row-8"></div>
-        <div class="cell close row-8"></div>
-        <div class="cell close row-8"></div>
-        <div class="cell close row-8"></div>
-        <div class="cell close row-8"></div>
-        <div class="cell close row-8"></div>
-        <div class="cell close row-8"></div>
-        <div class="cell close row-8"></div>
-        <div class="cell close row-9"></div>
-        <div class="cell close row-9"></div>
-        <div class="cell close row-9"></div>
-        <div class="cell close row-9"></div>
-        <div class="cell close row-9"></div>
-        <div class="cell close row-9"></div>
-        <div class="cell close row-9"></div>
-        <div class="cell close row-9"></div>
-        <div class="cell close row-9"></div>
-        <div class="cell close row-9"></div>
-        <div class="cell close row-10"></div>
-        <div class="cell close row-10"></div>
-        <div class="cell close row-10"></div>
-        <div class="cell close row-10"></div>
-        <div class="cell close row-10"></div>
-        <div class="cell close row-10"></div>
-        <div class="cell close row-10"></div>
-        <div class="cell close row-10"></div>
-        <div class="cell close row-10"></div>
-        <div class="cell close row-10"></div>
-      </section>
+    <div class="modal">
+      <div class="container">
+        <div class="title">
+          <h2 class="title-up">You lose,</h2>
+          <span class="title-down">sorry...</span>
+        </div>
+        <div class="score">
+          <ul class="score-list">
+            <li class="score-item click">
+              <span class="icon icon-click"></span>
+              <span class="score-text score-click">010</span>
+            </li>
+            <li class="score-item time">
+              <span class="icon icon-time"></span>
+              <span class="score-text score-time">010</span>
+            </li>
+            <li class="score-item bombs">
+              <span class="icon icon-bombs"></span>
+              <span class="score-text score-bombs">010</span>
+            </li>
+          </ul>
+        </div>
+        <div class="btns-boards">
+          <button class="btn btn-white">Recent matches</button>
+          <button class="btn btn-white">Leaderboard</button>
+        </div>
+        <button class="btn play">PLAY AGAIN</button>
+        <button class="btn btn-transparent btn-circle">
+          <span class="icon-option"></span>
+        </button>
+      </div>
     </div>
   </body>
 </html>

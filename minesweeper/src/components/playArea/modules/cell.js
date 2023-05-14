@@ -26,6 +26,7 @@ export default class Cell {
     this.row = row;
     this.column = column;
     this.$cell = null;
+    this.handlers = null;
   }
 
   updateCell() {
@@ -40,6 +41,14 @@ export default class Cell {
     if (this.bomb && this.open && !this.explosion) {
       this.explosion = true;
       this.explosionBomb();
+    }
+    if (this.flag) {
+      this.$cell.classList.add('flag');
+      this.$cell.removeEventListener('click', this.handlers.click);
+    }
+    if (this.$cell.classList.contains('flag') && !this.flag) {
+      this.$cell.classList.remove('flag');
+      this.$cell.addEventListener('click', this.handlers.click);
     }
   }
 
@@ -76,5 +85,9 @@ export default class Cell {
       }
     });
     return col;
+  }
+
+  setHandlers(handlers) {
+    this.handlers = handlers;
   }
 }

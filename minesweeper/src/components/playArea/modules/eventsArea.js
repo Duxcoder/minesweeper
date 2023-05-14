@@ -91,24 +91,47 @@ export default class EventsArea {
     const totalArrayCells = cells.reduce((arr, row) => [...arr, ...row], []);
     console.log(totalArrayCells);
     const bombs = totalArrayCells.filter((cell) => cell.bomb);
-    const handler = (e) => {
+    const handler = (e, cell) => {
       const { target } = e;
-      totalArrayCells.forEach((cell) => {
-        const cellElem = cell;
-        const { $cell } = cell;
-        if (target === $cell) {
-          cellElem.open = true;
-          cellElem.updateCell();
-          if (cellElem.bomb) {
-            cascadeOfExplosions(bombs, cellElem);
-          }
-          if (!cellElem.number && !cellElem.bomb) {
-            this.openCellsAround(renderAreaClass, [cellElem.row, cellElem.column]);
-          }
+      const cellElem = cell;
+      const { $cell } = cell;
+      if (target === $cell) {
+        cellElem.open = true;
+        cellElem.updateCell();
+        if (cellElem.bomb) {
+          cascadeOfExplosions(bombs, cellElem);
         }
-      });
+        if (!cellElem.number && !cellElem.bomb) {
+          this.openCellsAround(renderAreaClass, [cellElem.row, cellElem.column]);
+        }
+      }
     };
-    $area.addEventListener('click', handler);
+    const setFlag = (e, cell) => {
+      e.preventDefault();
+      const { target } = e;
+      const cellElem = cell;
+      const { $cell } = cell;
+      if (target === $cell) {
+        cellElem.flag = !cellElem.flag;
+        cellElem.updateCell();
+      }
+    };
+    totalArrayCells.forEach((cell) => {
+      const cellElem = cell;
+      const handlerWrapper = (e) => {
+        handler(e, cell);
+      };
+      const setFlagWrapper = (e) => {
+        setFlag(e, cell);
+      };
+      const handlers = {
+        click: handlerWrapper,
+        contextmenu: setFlagWrapper,
+      };
+      cellElem.setHandlers(handlers);
+      cell.$cell.addEventListener('click', handlerWrapper);
+      cell.$cell.addEventListener('contextmenu', setFlagWrapper);
+    });
     this.$area = $area;
   }
 
