@@ -49,7 +49,7 @@ export default class Cell {
     img.src = bombImg;
     img.classList.add('cell-bomb');
     this.$cell.append(img);
-    const audio = new Audio(boom);
+    const audio = new Audio(boom, { type: 'audio/mpeg' });
     audio.play();
   }
 

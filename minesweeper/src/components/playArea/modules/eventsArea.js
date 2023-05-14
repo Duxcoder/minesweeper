@@ -3,6 +3,19 @@ function getRandomNum(from, to) {
   return Math.floor(rand);
 }
 
+function cascadeOfExplosions(bombs, clickCell) {
+  bombs.forEach((bomb) => {
+    const second = getRandomNum(1, 10);
+    if (clickCell !== bomb) {
+      setTimeout(() => {
+        const bombElem = bomb;
+        bombElem.open = true;
+        bombElem.updateCell();
+      }, second * 100);
+    }
+  });
+}
+
 // function getRandomNum(from, to) {
 //   const rand = from + Math.random() * (to + 1 - from);
 //   return Math.floor(rand);
@@ -79,23 +92,18 @@ export default class EventsArea {
     console.log(totalArrayCells);
     const bombs = totalArrayCells.filter((cell) => cell.bomb);
     const handler = (e) => {
+      const { target } = e;
       totalArrayCells.forEach((cell) => {
         const cellElem = cell;
         const { $cell } = cell;
-        if (e.target === $cell) {
+        if (target === $cell) {
           cellElem.open = true;
           cellElem.updateCell();
           if (cellElem.bomb) {
-            bombs.forEach((bomb) => {
-              const second = getRandomNum(1, 10);
-              if (cellElem !== bomb) {
-                setTimeout(() => {
-                  const bombElem = bomb;
-                  bombElem.open = true;
-                  bombElem.updateCell();
-                }, second * 100);
-              }
-            });
+            cascadeOfExplosions(bombs, cellElem);
+          }
+          if (!cellElem.number && !cellElem.bomb) {
+            this.openCellsAround(renderAreaClass, [cellElem.row, cellElem.column]);
           }
         }
       });
@@ -103,6 +111,7 @@ export default class EventsArea {
     $area.addEventListener('click', handler);
     this.$area = $area;
   }
+
   // createBombs(areaCells, countBombs, exception = false) {
   //   const area = areaCells;
   //   let count = 0;

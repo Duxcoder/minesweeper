@@ -33,8 +33,8 @@ export default class RenderPlayArea {
       const options = {
         open: false,
         dark: ((r % 2) && ((c + 1) % 2)) || (((r + 1) % 2) && ((c) % 2)),
-        row: r + 1,
-        column: c + 1,
+        row: r,
+        column: c,
         number: cell,
       };
       const cellClass = new Cell(options);
