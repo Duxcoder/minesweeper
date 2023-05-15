@@ -1,0 +1,50 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+.logo {
+  position: relative;
+  font-family: "Jockey One";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2.4rem;
+  line-height: 2.4rem;
+  text-transform: uppercase;
+  background: linear-gradient(123.94deg, #455A64 31.4%, #607D8B 70.11%), #455A64;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: 0.3s;
+  cursor: pointer;
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: -0.2rem;
+    left: -0.4rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-size: contain;
+    background-image: url('../../assets/img/bomb.png');
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    right: -0.8rem;
+    top: calc(50% - 0.88rem);
+    width: 1.9rem;
+    height: 1.9rem;
+    background-size: contain;
+    transform: rotate(15deg);
+    background-image: url('../../assets/img/flag.png');
+  }
+}
+.orange {
+  background: linear-gradient(111.63deg, #ffd54f 9.31%, #ffc107 29.57%), #ffd54f;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
