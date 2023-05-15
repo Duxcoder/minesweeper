@@ -15,163 +15,163 @@
     visibility: visible;
     opacity: 1;
   }
-}
 
-.container {
-  display: grid;
-  justify-items: center;
-  align-items: center;
-  grid-template-rows: repeat(3, 1fr);
-  grid-template-columns: repeat(2, 1fr);
-  min-width: 330px;
-  min-height: 236px;
-  margin: 0 auto;
-  max-width: 800px;
-  background: rgba(255, 255, 255, 0.84);
-  border: 1px solid #f3f3f3;
-  backdrop-filter: blur(5px);
-  border-radius: 20px;
-  padding: 38px;
-  box-sizing: border-box;
-}
+  .container {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    min-width: 330px;
+    min-height: 236px;
+    margin: 0 auto;
+    max-width: 800px;
+    background: rgba(255, 255, 255, 0.84);
+    border: 1px solid #f3f3f3;
+    backdrop-filter: blur(5px);
+    border-radius: 20px;
+    padding: 38px;
+    box-sizing: border-box;
+  }
 
-.title {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font-family: "Josefin Sans";
-  font-style: normal;
-  font-weight: 700;
-  text-align: right;
-  text-transform: uppercase;
-  color: #5c7784;
-  .title-up {
-    font-size: 26px;
-    line-height: 26px;
-    margin: 0;
+  .title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: "Josefin Sans";
+    font-style: normal;
+    font-weight: 700;
+    text-align: right;
+    text-transform: uppercase;
+    color: #5c7784;
+    .title-up {
+      font-size: 26px;
+      line-height: 26px;
+      margin: 0;
+    }
+    .title-down {
+      font-size: 14px;
+      line-height: 14px;
+    }
   }
-  .title-down {
-    font-size: 14px;
-    line-height: 14px;
-  }
-}
-.score {
-  display: flex;
-  align-items: center;
-  grid-area: 1 / 2 / 3 / 3;
-}
-.score-list {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  .score-item {
+  .score {
     display: flex;
     align-items: center;
-    gap: 8px;
+    grid-area: 1 / 2 / 3 / 3;
   }
-  .icon {
-    display: block;
-    width: 28px;
-    height: 28px;
-    background-size: contain;
-    background-repeat: no-repeat;
+  .score-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    .score-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .icon {
+      display: block;
+      width: 28px;
+      height: 28px;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    .icon-click {
+      background-position-x: 6px;
+      background-image: url("../../../assets/img/click.png");
+    }
+    .icon-time {
+      background-image: url("../../../assets/img/time.png");
+    }
+    .icon-bombs {
+      background-position-x: 4px;
+      background-image: url("../../../assets/img/bomb.png");
+    }
+    .score-text {
+      padding-top: 6px;
+      font-family: "Josefin Sans";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 24px;
+      text-transform: uppercase;
+      color: #617e8c;
+    }
   }
-  .icon-click {
-    background-position-x: 6px;
-    background-image: url("../../../assets/img/click.png");
+
+  .btns-boards {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    outline: none;
   }
-  .icon-time {
-    background-image: url("../../../assets/img/time.png");
+  .btn {
+    font-family: "Josefin Sans";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 12px;
+    text-transform: uppercase;
+    color: #46616d;
+    outline: none;
+    transition: 0.3s;
   }
-  .icon-bombs {
-    background-position-x: 4px;
-    background-image: url("../../../assets/img/bomb.png");
+  .btn-white {
+    min-width: 164px;
+    padding: 10px 8px 8px 8px;
+    background: #ffffff;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    &:hover,
+    &:active {
+      background: #5b7785fc;
+      color: #fff;
+    }
   }
-  .score-text {
+  .play {
     padding-top: 6px;
     font-family: "Josefin Sans";
     font-style: normal;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 24px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
     text-transform: uppercase;
-    color: #617e8c;
+    color: #46616d;
+    border-top: solid 2px transparent;
+    border-bottom: solid 2px transparent;
+    background: none;
+    &:hover,
+    &:active {
+      border-bottom: solid 2px #46616d;
+    }
   }
-}
-
-.btns-boards {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  outline: none;
-}
-.btn {
-  font-family: "Josefin Sans";
-  font-style: normal;
-  font-weight: 300;
-  font-size: 12px;
-  line-height: 12px;
-  text-transform: uppercase;
-  color: #46616d;
-  outline: none;
-  transition: 0.3s;
-}
-.btn-white {
-  min-width: 164px;
-  padding: 10px 8px 8px 8px;
-  background: #ffffff;
-  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
-  border-radius: 20px;
-  &:hover,
-  &:active {
-    background: #5b7785fc;
-    color: #fff;
+  .btn-transparent {
+    border: 0.5px solid #b3b3b3;
+    background: none;
   }
-}
-.play {
-  padding-top: 6px;
-  font-family: "Josefin Sans";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
-  text-transform: uppercase;
-  color: #46616d;
-  border-top: solid 2px transparent;
-  border-bottom: solid 2px transparent;
-  background: none;
-  &:hover,
-  &:active {
-    border-bottom: solid 2px #46616d;
+  .btn-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    padding: 8px;
+    transition: 0.3s;
+    &:hover,
+    &:active {
+      background: #5e5e5e;
+    }
+    &:hover .icon-option,
+    &:active .icon-option {
+      color: #fff !important;
+    }
   }
-}
-.btn-transparent {
-  border: 0.5px solid #b3b3b3;
-  background: none;
-}
-.btn-circle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  padding: 8px;
-  transition: 0.3s;
-  &:hover,
-  &:active {
-    background: #5e5e5e;
+  .icon-option {
+    display: flex;
+    min-width: 16px;
+    min-height: 16px;
+    color: #8e8d8d;
+    transition: 0.3s;
+    border-radius: 50%;
   }
-  &:hover .icon-option,
-  &:active .icon-option{
-    color: #fff !important;
-  }
-}
-.icon-option {
-  display: flex;
-  min-width: 16px;
-  min-height: 16px;
-  color: #8e8d8d;
-  transition: 0.3s;
-  border-radius: 50%;
 }

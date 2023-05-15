@@ -2,6 +2,7 @@ import PlayArea from './playArea/playArea';
 import Options from './options';
 import Popup from './popupModals/popup';
 import header from './header/header';
+import Score from './score/score';
 // import RenderPlayArea from './playArea/modules/renderPlayArea';
 
 export default class Manager {
@@ -9,14 +10,13 @@ export default class Manager {
     this.popup = new Popup();
     this.area = new PlayArea(this.popup);
     this.options = new Options();
+    this.score = new Score();
   }
 
   startGame() {
     this.options.setAreaData();
-    // this.renderHead();
     header();
-    // this.renderDescriptionPanel()
-    // this.renderScorePanel()
+    this.score.renderScoreSection();
     this.playArea();
     // this.renderFooter()
   }
