@@ -1,16 +1,20 @@
 import PlayArea from './playArea/playArea';
 import Options from './options';
+import Popup from './popupModals/popup';
+import header from './header/header';
 // import RenderPlayArea from './playArea/modules/renderPlayArea';
 
 export default class Manager {
   constructor() {
-    this.area = new PlayArea();
+    this.popup = new Popup();
+    this.area = new PlayArea(this.popup);
     this.options = new Options();
   }
 
   startGame() {
     this.options.setAreaData();
     // this.renderHead();
+    header();
     // this.renderDescriptionPanel()
     // this.renderScorePanel()
     this.playArea();

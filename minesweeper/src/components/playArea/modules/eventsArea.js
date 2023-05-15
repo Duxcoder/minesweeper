@@ -28,7 +28,8 @@ function cascadeOfExplosions(bombs, clickCell) {
 //   });
 // };
 export default class EventsArea {
-  constructor() {
+  constructor(popup) {
+    this.popup = popup;
     this.$area = null;
     this.cells = null;
     this.firstClickCellPosition = null;
@@ -100,6 +101,7 @@ export default class EventsArea {
         cellElem.updateCell();
         if (cellElem.bomb) {
           cascadeOfExplosions(bombs, cellElem);
+          this.popup.runGameOver();
         }
         if (!cellElem.number && !cellElem.bomb) {
           this.openCellsAround(renderAreaClass, [cellElem.row, cellElem.column]);

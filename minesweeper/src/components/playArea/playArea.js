@@ -14,10 +14,11 @@ const isExceptions = (exception, randRow, randColumn) => {
 };
 
 export default class PlayArea {
-  constructor() {
+  constructor(popup) {
+    this.popup = popup;
     this.area = [];
     this.$renderArea = null;
-    this.events = new EventsArea();
+    this.events = new EventsArea(popup);
     this.options = null;
   }
 
