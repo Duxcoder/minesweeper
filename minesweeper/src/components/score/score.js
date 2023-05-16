@@ -1,12 +1,9 @@
 import './style.scss';
 
 const addZero = (num) => {
-  if (num < 10) {
-    return `00${num}`;
-  }
-  if (num > 9 && num < 100) {
-    return `0${num}`;
-  }
+  if (num > 999) return '999+';
+  if (num < 10) return `00${num}`;
+  if (num > 9 && num < 100) return `0${num}`;
   return num;
 };
 export default class Score {
@@ -14,31 +11,43 @@ export default class Score {
     clicks = 0,
     time = 0,
     bombs = 0,
-  } = {}) {
+    options,
+  }) {
     this.$scoreSection = null;
     this.$descriptionPanel = null;
     this.clicks = clicks;
     this.time = time;
     this.bombs = bombs;
+    this.options = options;
   }
 
   updateScorePanel() {
-    this.data = 1;
-    this.updateClick();
-    this.updateTime();
-    this.updateBombs();
+    const content = `
+        <li class="score-item click">
+          <span class="icon icon-click"></span>
+          <span class="score-text score-click">${addZero(this.clicks)}</span>
+        </li>
+        <li class="score-item time">
+          <span class="icon icon-time"></span>
+          <span class="score-text score-time">${addZero(this.time)}</span>
+        </li>
+        <li class="score-item bombs">
+          <span class="icon icon-bombs"></span>
+          <span class="score-text score-bombs">${addZero(this.bombs)}</span>
+        </li>`;
+    this.$scorePanel.innerHTML = content;
   }
 
-  updateClick() {
-    this.data = 1;
+  updateClick(clicks) {
+    this.clicks = clicks;
   }
 
-  updateTime() {
-    this.data = 1;
+  updateTime(time) {
+    this.time = time;
   }
 
-  updateBombs() {
-    this.data = 1;
+  updateBombs(bombs) {
+    this.bombs = bombs < 0 ? 0 : bombs;
   }
 
   getDescriptionPanel() {
@@ -69,6 +78,7 @@ export default class Score {
   }
 
   getScorePanel() {
+    this.bombs = this.options.getAreaData().data.bombs;
     const $scorePanel = document.createElement('ul');
     $scorePanel.classList.add('score-panel');
     const content = `

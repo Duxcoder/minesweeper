@@ -7,10 +7,10 @@ import Score from './score/score';
 
 export default class Manager {
   constructor() {
-    this.popup = new Popup();
-    this.area = new PlayArea(this.popup);
     this.options = new Options();
-    this.score = new Score();
+    this.popup = new Popup();
+    this.score = new Score({ options: this.options });
+    this.area = new PlayArea(this.popup, this.score);
   }
 
   startGame() {

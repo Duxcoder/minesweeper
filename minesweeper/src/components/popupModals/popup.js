@@ -1,10 +1,11 @@
-import popupGameOver from './gameOver/popupGameOver';
+import PopupGameOver from './gameOver/popupGameOver';
 
 export default class Popup {
-  constuctor() {
+  constructor() {
     this.gameOver = false;
     this.$modal = null;
     this.$container = null;
+    this.popupGameOver = new PopupGameOver();
   }
 
   renderPopup($content = '') {
@@ -18,10 +19,12 @@ export default class Popup {
     $body.prepend($modal);
     this.$modal = $modal;
     this.$container = $container;
+    console.log(this.popupGameOver);
   }
 
-  runGameOver() {
-    this.renderPopup(popupGameOver());
+  runGameOver(result) {
+    const runGameOver = this.popupGameOver.render(result);
+    this.renderPopup(runGameOver);
     this.$modal.classList.add('modal-show');
   }
 

@@ -123,7 +123,7 @@
       background-repeat: no-repeat;
     }
     .icon-click {
-      background-position-x: 6px;
+      background-position-x: 0.4rem;
       background-image: url("../../assets/img/click.png");
     }
     .icon-time {
@@ -134,6 +134,8 @@
       background-image: url("../../assets/img/bomb.png");
     }
     .score-text {
+      text-align: center;
+      width: 2rem;
       padding-top: 6px;
       font-family: "Josefin Sans";
       font-style: normal;
