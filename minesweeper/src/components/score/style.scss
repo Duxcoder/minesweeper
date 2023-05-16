@@ -15,15 +15,15 @@
     font-style: normal;
     .name-label {
       font-weight: 400;
-      font-size: 10px;
-      line-height: 10px;
+      font-size: 0.6rem;
+      line-height: 0.6rem;
       text-transform: lowercase;
       color: rgba(70, 97, 110, 0.6);
     }
     .name {
       font-weight: 300;
-      font-size: 18px;
-      line-height: 18px;
+      font-size: 1.1rem;
+      line-height: 1.1rem;
       text-transform: uppercase;
       color: #46616d;
     }
@@ -33,14 +33,13 @@
   }
   .btn {
     display: flex;
-    gap: 2px;
+    gap: 0.1rem;
     align-items: center;
     justify-content: center;
     font-family: "Josefin Sans";
     font-style: normal;
     font-weight: 300;
-    font-size: 12px;
-    line-height: 12px;
+    font-size: clamp(8px, 0.75rem, 20px);
     text-transform: uppercase;
     color: #46616d;
     outline: none;
@@ -48,10 +47,10 @@
   }
   .btn-white {
     min-width: 82px;
-    padding: 6px 8px;
+    padding: 4px clamp(8px, 0.8rem, 30px);
     background: #ffffff;
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
-    border-radius: 20px;
+    border-radius: 1.2rem;
     &:hover,
     &:active {
       background: #5b7785fc;
@@ -71,8 +70,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
+    width: 1.5rem;
+    height: 1.5rem;
     border-radius: 50%;
     padding: 8px;
     transition: 0.3s;
@@ -87,18 +86,18 @@
   }
   .icon-rules {
     display: inline-flex;
-    min-width: 12px;
-    min-height: 12px;
+    min-width: 0.5rem;
+    min-height: 0.5rem;
     color: #46616d;
     transition: 0.3s;
   }
   .text-rules {
-    padding-top: 4px;
+    padding-top: 0.16rem;
   }
   .icon-restart {
     display: flex;
-    min-width: 16px;
-    min-height: 16px;
+    min-width: 0.8rem;
+    min-height: 0.8rem;
     color: #617e8c;
     transition: 0.3s;
     border-radius: 50%;
@@ -110,7 +109,7 @@
       display: flex;
       align-items: center;
       gap: 4px;
-      padding: 0 8px;
+      padding: 0 0.4rem;
       &.time {
         border-left: solid 2px #DFDFDF;
         border-right: solid 2px #DFDFDF;
@@ -118,8 +117,8 @@
     }
     .icon {
       display: block;
-      width: 28px;
-      height: 28px;
+      width: 1.4rem;
+      height: 1.4rem;
       background-size: contain;
       background-repeat: no-repeat;
     }
@@ -139,8 +138,8 @@
       font-family: "Josefin Sans";
       font-style: normal;
       font-weight: 400;
-      font-size: 24px;
-      line-height: 24px;
+      font-size: 1rem;
+      line-height: 1rem;
       text-transform: uppercase;
       color: #617e8c;
     }

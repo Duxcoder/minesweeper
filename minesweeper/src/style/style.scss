@@ -3,13 +3,11 @@
 @import "../components/playArea/modules/style.scss";
 
 html {
-  font-size: clamp(16px, 2vw, 38px);
+  font-size: clamp(16px, 3vw, 38px);
 }
 body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  min-height: 100vh;
 }
 ul,
 li {
