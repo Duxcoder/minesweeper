@@ -14,7 +14,7 @@ export default class Score {
     clicks = 0,
     time = 0,
     bombs = 0,
-  }) {
+  } = {}) {
     this.$scoreSection = null;
     this.$descriptionPanel = null;
     this.clicks = clicks;
