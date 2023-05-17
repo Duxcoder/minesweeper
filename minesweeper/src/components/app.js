@@ -3,13 +3,12 @@ import Options from './options';
 import Popup from './popupModals/popup';
 import header from './header/header';
 import Score from './score/score';
-// import RenderPlayArea from './playArea/modules/renderPlayArea';
 
 export default class Manager {
   constructor() {
     this.options = new Options();
-    this.popup = new Popup();
-    this.score = new Score({ options: this.options });
+    this.popup = new Popup(this.restart.bind(this));
+    this.score = new Score({ options: this.options, restart: this.restart.bind(this) });
     this.area = new PlayArea(this.popup, this.score);
   }
 
@@ -18,52 +17,21 @@ export default class Manager {
     header();
     this.score.renderScoreSection();
     this.playArea();
-    // this.renderFooter()
   }
 
-  // renderHead() {
-  //   console.log('render');
-  // }
-
-  // renderDescriptionPanel() {
-
-  // }
-
-  // renderScorePanel() {
-
-  // }
+  restart() {
+    console.log('restart');
+    document.body.innerHTML = '';
+    this.options = new Options();
+    console.log(this);
+    this.popup = new Popup(this.restart.bind(this));
+    this.score = new Score({ options: this.options, restart: this.restart.bind(this) });
+    this.area = new PlayArea(this.popup, this.score);
+    this.startGame();
+  }
 
   playArea() {
     this.area.startPlayArea(this.options.areaData);
     // FUNCTIONALITY
   }
-
-  // renderFooter() {
-
-  // }
-
-  // generationPlayArea() {
-  //   return {
-  //     bombs: [],
-  //     numbers: [
-  //       {
-  //         name: '1',
-  //         color: '#46616F',
-  //         positions: [
-  //           [0, 2], [0, 3], [5, 4],
-  //         ],
-  //       },
-  //       {
-  //         name: '2',
-  //         color: '#59A834',
-  //         positions: [
-  //           [1, 2], [5, 3], [7, 1],
-  //         ],
-  //       },
-  //     ],
-  //   };
-  // }
 }
-
-// const app = new Manager();
-// Manager.renderHead();
