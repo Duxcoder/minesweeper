@@ -12,7 +12,8 @@ export default class Popup {
   renderPopup($content = '') {
     const $body = document.body;
     const $modal = document.createElement('div');
-    $modal.classList.add('modal');
+    // test remove option
+    $modal.classList.add('modal', 'option');
     $modal.append($content);
     $body.prepend($modal);
     this.$modal = $modal;
@@ -24,6 +25,10 @@ export default class Popup {
     body.style.overflow = 'hidden';
     const runGameOver = this.popupGameOver.render(result);
     this.renderPopup(runGameOver);
+    /// test
+    const popupOpt = this.popupOptions.render();
+    this.renderPopup(popupOpt);
+    /// test
     this.$modal.classList.add('modal-show');
   }
 
