@@ -1,0 +1,305 @@
+:root {
+  --option-color: #60ac4d;
+}
+.modal.option {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: rgba(47, 47, 47, 0.2);
+  backdrop-filter: blur(6px);
+  z-index: -1;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+  &.modal-show {
+    z-index: 2;
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    min-width: 330px;
+    min-height: 236px;
+    margin: 0 auto;
+    max-width: 800px;
+    background: #fff;
+    border: 1px solid #f3f3f3;
+    backdrop-filter: blur(5px);
+    border-radius: 20px;
+    padding: 38px;
+    box-sizing: border-box;
+  }
+
+  .title {
+    margin: 0;
+    padding-bottom: 1.2rem;
+  }
+
+  .option-list {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+    gap: 1.4rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .option-item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .option-name {
+    font-family: "Josefin Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.3rem;
+    color: #455a64;
+    padding-top: 0.2rem;
+  }
+
+  .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 60%;
+    padding: 0 1rem;
+    gap: 0.2rem;
+  }
+
+  .input-name {
+    background: transparent;
+    height: 1.4rem;
+    min-width: 2rem;
+    border: 0.1rem solid var(--option-color);
+    border-radius: 6px;
+    font-family: "Josefin Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1rem;
+    color: var(--option-color);
+    padding: 0.1rem 1rem;
+    padding-top: 0.3rem;
+    &:focus {
+      outline: 0.1rem solid var(--option-color);
+    }
+  }
+
+  .level-list {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .level-item {
+  }
+  .level-label {
+    font-family: "Josefin Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1rem;
+    color: #ffffff;
+    background: var(--option-color);
+    padding: 0.4rem 0.6rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .level-item input:not(:checked) + label {
+    background: transparent;
+    color: #b0b0b0;
+    &:hover {
+      background: #f7f7f7;
+    }
+  }
+
+  .level-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .bombs-num,
+  .theme-mode,
+  .sound-mode {
+    font-family: "Josefin Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.8rem;
+    color: #b0b0b0;
+  }
+  .bomb-range {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .input-bombs {
+    width: 100%;
+    -webkit-appearance: none;
+    &:focus {
+      outline: none;
+    }
+    &::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 0.2rem;
+      background: var(--option-color);
+      border-radius: 0.1rem;
+      cursor: pointer;
+    }
+    &::-moz-range-track {
+      width: 100%;
+      height: 0.2rem;
+      background: var(--option-color);
+      border-radius: 0.1rem;
+      cursor: pointer;
+    }
+    &::-webkit-slider-thumb {
+      height: 0.7rem;
+      width: 0.7rem;
+      margin-top: -0.26rem;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 1);
+      border: 0.1rem solid var(--option-color);
+      -webkit-appearance: none;
+      cursor: pointer;
+    }
+    &::-moz-range-thumb {
+      height: 0.7rem;
+      width: 0.7rem;
+      margin-top: -0.26rem;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 1);
+      border: 0.1rem solid var(--option-color);
+      -webkit-appearance: none;
+      cursor: pointer;
+    }
+    &::-moz-focus-outer {
+      border: 0;
+    }
+  }
+  .bomb-count {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    width: 1.4rem;
+    height: 0.8rem;
+    border-radius: 1rem;
+    text-align: center;
+    box-sizing: border-box;
+    background: var(--option-color);
+    left: -0.35rem;
+    top: -1.2rem;
+    color: #fff;
+    font-style: normal;
+    font-weight: normal;
+    line-height: normal;
+    font-size: 0.5rem;
+  }
+  .switch input {
+    display: none;
+  }
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    &.dark {
+      background-color: #463981;
+    }
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+  }
+
+  input:checked + .slider {
+    background-color: var(--option-color);
+  }
+
+  input:focus + .slider {
+    box-shadow: 0 0 1px var(--option-color);
+  }
+
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+
+  .slider.round:before {
+    border-radius: 50%;
+  }
+  .btns {
+    display: flex;
+  }
+  .btn-options {
+    font-family: "Josefin Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.8rem;
+    padding: 0.2rem 1.6rem;
+    padding-top: 0.26rem;
+    transition: 0.3s;
+    &.accept {
+      background: var(--option-color);
+      color: #fff;
+      border-radius: 1rem 0px 0px 1rem;
+      &:hover {
+        background: #468836;
+      }
+    }
+    &.cancel {
+      color: var(--option-color);
+      background: transparent;
+      border-right: solid 0.1rem var(--option-color);
+      border-top: solid 0.1rem var(--option-color);
+      border-bottom: solid 0.1rem var(--option-color);
+      border-left: none;
+      border-radius: 0px 1rem 1rem 0px;
+      &:hover {
+        background: #ff7920;
+        border-color: #ff7920;
+        color: #fff;
+      }
+    }
+  }
+}

@@ -3,6 +3,7 @@ import Options from './options';
 import Popup from './popupModals/popup';
 import header from './header/header';
 import Score from './score/score';
+import footer from './footer/footer';
 
 export default class Manager {
   constructor() {
@@ -17,11 +18,13 @@ export default class Manager {
     header();
     this.score.renderScoreSection();
     this.playArea();
+    footer();
   }
 
   restart() {
     console.log('restart');
     document.body.innerHTML = '';
+    document.body.style.overflow = '';
     this.options = new Options();
     console.log(this);
     this.popup = new Popup(this.restart.bind(this));

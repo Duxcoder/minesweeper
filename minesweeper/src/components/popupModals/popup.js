@@ -1,10 +1,12 @@
 import PopupGameOver from './gameOver/popupGameOver';
+import PopupOptions from './options/popupOptions';
 
 export default class Popup {
   constructor(restart) {
     this.gameOver = false;
     this.$modal = null;
     this.popupGameOver = new PopupGameOver(restart);
+    this.popupOptions = new PopupOptions();
   }
 
   renderPopup($content = '') {
