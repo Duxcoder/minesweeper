@@ -18,13 +18,20 @@ function createOptionItem(name, $content) {
   return $item;
 }
 
-function contentName() {
+function contentName(username = '') {
   const $content = createDomElement('div', ['content', 'content-name']);
   const $input = document.createElement('input');
   $input.classList.add('input-name');
   $input.type = 'text';
   $input.name = 'name';
   $input.id = '0';
+  $input.value = username;
+  $input.onclick = function handlerClick() {
+    this.value = '';
+  };
+  $input.onchange = function handlerChange() {
+    localStorage.setItem('_username', this.value);
+  };
   $content.append($input);
   return $content;
 }
@@ -61,6 +68,11 @@ function contentBombs() {
   $input.value = 10;
   $input.min = 10;
   $input.max = 99;
+  $input.oninput = function showSliderValue() {
+    $count.innerHTML = this.value;
+    const position = (this.value / this.max);
+    $count.style.left = `${(position * 7) - 1.07}rem`;
+  };
   $content.append($bombsMin, $range, $bombsMax);
   $range.append($count, $input);
   return $content;
@@ -96,7 +108,10 @@ export default class PopupOptions {
     this.restart = restart;
   }
 
-  render() {
+  render(option = {
+    username: localStorage.getItem('_username'),
+  }) {
+    const { username, runClose } = option;
     const $container = document.createElement('div');
     $container.classList.add('container');
     const $optionList = document.createElement('ul');
@@ -104,7 +119,7 @@ export default class PopupOptions {
     const $title = '<h2 class="title">OPTIONS</h2>';
     $container.innerHTML += $title;
     $container.append($optionList);
-    $optionList.append(createOptionItem('Username:', contentName()));
+    $optionList.append(createOptionItem('Username:', contentName(username)));
     $optionList.append(createOptionItem('Level:', contentLevel()));
     $optionList.append(createOptionItem('Bombs:', contentBombs()));
     $optionList.append(createOptionItem('Theme:', contentTheme()));
@@ -112,6 +127,7 @@ export default class PopupOptions {
     const $btns = createDomElement('div', ['btns']);
     const $accept = createDomElement('button', ['btn-options', 'accept'], 'Accept');
     const $cancel = createDomElement('button', ['btn-options', 'cancel'], 'Cancel');
+    $cancel.onclick = runClose;
     $btns.append($accept, $cancel);
     $container.append($btns);
     this.$container = $container;

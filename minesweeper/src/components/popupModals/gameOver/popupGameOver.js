@@ -6,7 +6,7 @@ export default class PopupGameOver {
     this.restart = restart;
   }
 
-  render(result) {
+  render(result, runOptions) {
     // const { restart } = this;
     const $container = document.createElement('div');
     $container.classList.add('container');
@@ -33,6 +33,8 @@ export default class PopupGameOver {
       </svg>
     </span>
     `;
+    $btnOption.addEventListener('click', () => runOptions());
+
     const $content = `
     <div class="title">
             ${result === 'win' ? win : lose}

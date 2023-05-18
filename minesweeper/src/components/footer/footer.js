@@ -1,6 +1,6 @@
 import './style.scss';
 
-function footer() {
+function footer(popupInst) {
   const $body = document.body;
   const $footer = document.createElement('footer');
   $footer.classList.add('footer');
@@ -21,6 +21,8 @@ function footer() {
   `;
   $footer.append($btnOption);
   $body.append($footer);
+
+  $btnOption.addEventListener('click', () => popupInst.runOptions());
   return $footer;
 }
 

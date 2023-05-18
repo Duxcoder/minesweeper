@@ -18,7 +18,7 @@ export default class Manager {
     header();
     this.score.renderScoreSection();
     this.playArea();
-    footer();
+    footer(this.popup);
   }
 
   restart() {

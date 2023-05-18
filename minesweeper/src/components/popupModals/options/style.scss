@@ -148,7 +148,7 @@
     justify-content: center;
   }
   .input-bombs {
-    width: 100%;
+    width: 7rem;
     -webkit-appearance: none;
     &:focus {
       outline: none;
@@ -260,7 +260,6 @@
     transform: translateX(26px);
   }
 
-  /* Rounded sliders */
   .slider.round {
     border-radius: 34px;
   }
