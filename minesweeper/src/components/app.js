@@ -15,7 +15,7 @@ export default class Manager {
   }
 
   startGame() {
-    this.options.setAreaData();
+    // this.options.setAreaData();
     header();
     this.score.renderScoreSection();
     this.playArea();
@@ -34,7 +34,6 @@ export default class Manager {
   }
 
   playArea() {
-    this.area.startPlayArea(this.options.areaData);
-    // FUNCTIONALITY
+    this.area.startPlayArea(this.options);
   }
 }

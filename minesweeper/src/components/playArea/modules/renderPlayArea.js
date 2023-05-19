@@ -1,11 +1,11 @@
 import Cell from './cell';
 
 export default class RenderPlayArea {
-  constructor({ container, data }, area) {
-    this.container = container;
+  constructor(row, column, area) {
+    this.container = document.body;
     this.area = area;
-    this.row = data.row;
-    this.column = data.column;
+    this.row = row;
+    this.column = column;
     this.$area = null;
     this.cells = null;
     this.$cells = null;

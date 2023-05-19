@@ -34,6 +34,16 @@ export default class Options {
       theme: localTheme || 'light',
       sound: localSound || 'on',
     };
+    const row = () => {
+      const { level } = options;
+      let rows = 10;
+      if (level === 'easy') rows = 10;
+      if (level === 'medium') rows = 15;
+      if (level === 'hard') rows = 25;
+      return rows;
+    };
+    options.row = row();
+    options.column = row();
     this.options = options;
     return options;
   }

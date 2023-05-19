@@ -20,16 +20,14 @@ export default class PlayArea {
     this.area = [];
     this.$renderArea = null;
     this.events = new EventsArea(popup, score);
-    this.options = null;
   }
 
-  startPlayArea(optionsForRender) {
-    const { row, column } = optionsForRender.data;
-    this.options = optionsForRender;
+  startPlayArea(options) {
+    const { row, column } = options.getOptions();
     this.createArea(row, column);
-    this.renderAreaClass = new RenderPlayArea(optionsForRender, this.area);
+    this.renderAreaClass = new RenderPlayArea(row, column, this.area);
     const $area = this.renderAreaClass.renderPlayArea();
-    this.startEvents($area, optionsForRender.data);
+    this.startEvents($area, options);
   }
 
   createArea(row, column) {
@@ -46,7 +44,11 @@ export default class PlayArea {
 
   startEvents($area, options) {
     this.events.firstClickOnArea($area, this.renderAreaClass, (exceptions) => {
-      const bombs = this.createBombs(this.renderAreaClass.cells, options.bombs, exceptions);
+      const bombs = this.createBombs(
+        this.renderAreaClass.cells,
+        options.getOptions().bombs,
+        exceptions,
+      );
       this.plusOneAroundBomb(this.renderAreaClass.cells, bombs);
       this.events.clickTracking($area, this.renderAreaClass);
     });

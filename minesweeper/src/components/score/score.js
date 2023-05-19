@@ -82,7 +82,7 @@ export default class Score {
   }
 
   getScorePanel() {
-    this.bombs = this.options.getAreaData().data.bombs;
+    this.bombs = this.options.getOptions().bombs;
     const $scorePanel = document.createElement('ul');
     $scorePanel.classList.add('score-panel');
     const content = `
