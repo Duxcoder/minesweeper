@@ -67,7 +67,7 @@ export default class Score {
     const content = `
     <div class="name-block">
       <div class="name-label">playername:</div>
-      <div class="name">USER</div>
+      <div class="name">${localStorage.getItem('_username') ? localStorage.getItem('_username') : 'USER'}</div>
     </div>
     <button class="btn btn-white btn-rules">
         <span class="icon-rules">

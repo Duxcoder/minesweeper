@@ -1,3 +1,8 @@
+const defOptionsArea = {
+  rowCells: 5,
+  columnCells: 5,
+  countBombs: 5,
+};
 export default class Options {
   constructor() {
     this.username = null;
@@ -5,7 +10,35 @@ export default class Options {
     this.areaData = null;
   }
 
-  setAreaData(rowCells = 5, columnCells = 5, countBombs = 4) {
+  setOptions({
+    username, level, bombs, theme, sound,
+  }) {
+    if (username) localStorage.setItem('_username', username);
+    if (level) localStorage.setItem('_level', level);
+    if (bombs) localStorage.setItem('_bombs', bombs);
+    if (theme) localStorage.setItem('_theme', theme);
+    if (sound) localStorage.setItem('_sound', sound);
+    this.changeOptions = true;
+  }
+
+  getOptions() {
+    const localUser = localStorage.getItem('_username');
+    const localLvl = localStorage.getItem('_level');
+    const localBombs = localStorage.getItem('_bombs');
+    const localTheme = localStorage.getItem('_theme');
+    const localSound = localStorage.getItem('_sound');
+    const options = {
+      username: localUser || 'User',
+      level: localLvl || 'easy',
+      bombs: localBombs || 10,
+      theme: localTheme || 'light',
+      sound: localSound || 'on',
+    };
+    this.options = options;
+    return options;
+  }
+
+  setAreaData({ rowCells, columnCells, countBombs } = defOptionsArea) {
     const { body } = document;
     const options = {
       container: body,

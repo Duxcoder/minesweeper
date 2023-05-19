@@ -7,13 +7,11 @@ export default class PopupGameOver {
   }
 
   render(result, runOptions) {
-    // const { restart } = this;
     const $container = document.createElement('div');
     $container.classList.add('container');
     const $playAgain = document.createElement('button');
     $playAgain.classList.add('btn', 'play');
     $playAgain.textContent = 'PLAY AGAIN';
-    // console.log(restart);
     $playAgain.addEventListener('click', () => this.restart());
     const win = `
     <h2 class="title-up">YOU WIN!!!</h2>
@@ -34,7 +32,6 @@ export default class PopupGameOver {
     </span>
     `;
     $btnOption.addEventListener('click', () => runOptions());
-
     const $content = `
     <div class="title">
             ${result === 'win' ? win : lose}

@@ -120,7 +120,7 @@ export default class EventsArea {
         if (cellElem.bomb) {
           cascadeOfExplosions(bombs, cellElem);
           this.stopTimer();
-          this.popup.runGameOver();
+          this.popup.runGameOver('lose');
         }
         if (!cellElem.number && !cellElem.bomb) {
           this.openCellsAround(renderAreaClass, [cellElem.row, cellElem.column]);
