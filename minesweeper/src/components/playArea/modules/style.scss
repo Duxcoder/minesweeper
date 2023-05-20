@@ -7,36 +7,42 @@
 @keyframes openCell {
   from {
     // transform: scale(0.8);
-  };
+  }
   to {
     // transform: scale(1);
-  };
+  }
 }
 @keyframes Explosion {
   0% {
     transform: scale(0.8);
-    filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.25)) saturate(200%) brightness(1);
+    filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.25)) saturate(200%)
+      brightness(1);
   }
   20% {
     transform: scale(1.1);
-    filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.25)) saturate(200%) brightness(3);
+    filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.25)) saturate(200%)
+      brightness(3);
   }
   40% {
     transform: scale(0.8);
-    filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.25)) saturate(200%) brightness(1);
+    filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.25)) saturate(200%)
+      brightness(1);
   }
   60% {
     transform: scale(1.1);
-    filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.25)) saturate(200%) brightness(3);
+    filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.25)) saturate(200%)
+      brightness(3);
   }
   80% {
     transform: scale(0.8);
-    filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.25)) saturate(200%) brightness(1);
+    filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.25)) saturate(200%)
+      brightness(1);
     opacity: 1;
   }
   100% {
     transform: scale(2);
-    filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.25)) saturate(200%) brightness(5);
+    filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.25)) saturate(200%)
+      brightness(5);
     opacity: 0;
   }
 }
@@ -75,14 +81,14 @@
   transition: 0.3s;
   &.close {
     &.light {
-      background: linear-gradient(180deg, #5C7784 0%, #567A8B 100%);
+      background: linear-gradient(180deg, #5c7784 0%, #567a8b 100%);
       &:hover {
         box-shadow: inset 0px 0px 2px 2px #445f6d;
       }
     }
     &.dark {
       border-bottom: solid 4px #4d6773;
-      background: linear-gradient(180deg, #485E68 0%, #446170 100%);
+      background: linear-gradient(180deg, #485e68 0%, #446170 100%);
     }
   }
 
@@ -106,19 +112,21 @@
       // linear-gradient(180deg, #D9D9D9 0%, #E7E7E7 100%);
     }
     &.dark {
-      background: #e8e8e8;;
+      background: #e8e8e8;
       // linear-gradient(180deg,  0%, #DAD9D9 100%);
     }
+    &.bomb {
+      background: rgb(255 59 38);
+      box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.25);
+    }
   }
-  &.bomb {
-    background: rgb(255 59 38);
-    box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.25);
-  }
+
   & .cell-bomb {
     width: 70%;
     height: 70%;
     padding-left: 14%;
-    filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.25)) saturate(200%) brightness(1);
+    filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.25)) saturate(200%)
+      brightness(1);
     transform: rotate(0.11deg);
     animation: Explosion 1.8s forwards;
   }
@@ -147,5 +155,10 @@
   }
 }
 
-/* 15*15 - 40 */
-/* 25*25 - 99 */
+body.dark {
+  background: #46606c;
+
+  .play-area {
+    filter: invert(1) hue-rotate(170deg);
+  }
+}

@@ -11,11 +11,10 @@ export default class Manager {
     this.options = new Options();
     this.popup = new Popup(this.restart.bind(this), this.options);
     this.score = new Score({ options: this.options, restart: this.restart.bind(this) });
-    this.area = new PlayArea(this.popup, this.score);
+    this.area = new PlayArea(this.popup, this.score, this.options);
   }
 
   startGame() {
-    // this.options.setAreaData();
     header();
     this.score.renderScoreSection();
     this.playArea();
@@ -29,7 +28,7 @@ export default class Manager {
     this.options = new Options();
     this.popup = new Popup(this.restart.bind(this), this.options);
     this.score = new Score({ options: this.options, restart: this.restart.bind(this) });
-    this.area = new PlayArea(this.popup, this.score);
+    this.area = new PlayArea(this.popup, this.score, this.options);
     this.startGame();
   }
 

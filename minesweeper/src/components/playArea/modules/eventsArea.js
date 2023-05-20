@@ -1,3 +1,6 @@
+import winAudio from '../../../assets/audio/win.wav';
+import loseAudio from '../../../assets/audio/lose.mp3';
+
 function getRandomNum(from, to) {
   const rand = from + Math.random() * (to + 1 - from);
   return Math.floor(rand);
@@ -16,7 +19,7 @@ function cascadeOfExplosions(bombs, clickCell) {
   });
 }
 export default class EventsArea {
-  constructor(popup, score) {
+  constructor(popup, score, options) {
     this.popup = popup;
     this.score = score;
     this.$area = null;
@@ -25,6 +28,15 @@ export default class EventsArea {
     this.time = null;
     this.timer = null;
     this.bombs = null;
+    this.audio = [];
+    this.options = options;
+  }
+
+  playAudio(name) {
+    const audio = new Audio(name, { type: 'audio/mpeg' });
+    const isMuted = localStorage.getItem('_sound') === 'off';
+    if (!isMuted) audio.play();
+    this.audio.push(audio);
   }
 
   startTimer() {
@@ -115,11 +127,13 @@ export default class EventsArea {
         const isContainsEmptyCells = totalArrayCells.some((item) => !item.open && !item.bomb);
         if (!isContainsEmptyCells) {
           this.stopTimer();
+          this.playAudio(winAudio);
           this.popup.runGameOver('win');
         }
         if (cellElem.bomb) {
           cascadeOfExplosions(bombs, cellElem);
           this.stopTimer();
+          this.playAudio(loseAudio);
           this.popup.runGameOver('lose');
         }
         if (!cellElem.number && !cellElem.bomb) {

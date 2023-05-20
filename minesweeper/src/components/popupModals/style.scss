@@ -9,3 +9,14 @@
     transform: scale(0.9);
   }
 }
+
+
+/// Dark theme
+
+.dark {
+  .modal {
+    .container {
+      filter: invert(1) hue-rotate(170deg);
+    }
+  }
+}

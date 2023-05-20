@@ -1,5 +1,7 @@
 import bombImg from '../../../assets/img/bomb.png';
-import boom from '../../../assets/audio/boom.mp3';
+import boomAudio from '../../../assets/audio/boom.mp3';
+import cellAudio from '../../../assets/audio/cell.mp3';
+import flagAudio from '../../../assets/audio/flag.mp3';
 
 const defOptions = {
   flag: null,
@@ -27,12 +29,21 @@ export default class Cell {
     this.column = column;
     this.$cell = null;
     this.handlers = null;
+    this.audio = [];
+  }
+
+  playAudio(name) {
+    const audio = new Audio(name, { type: 'audio/mpeg' });
+    const isMuted = localStorage.getItem('_sound') === 'off';
+    if (!isMuted) audio.play();
+    this.audio.push(audio);
   }
 
   updateCell() {
     if (this.open) {
       this.$cell.classList.remove('close');
       this.$cell.classList.add('open');
+      this.playAudio(cellAudio);
     }
     if (this.number && this.open) { // && this.open
       this.$cell.style.color = this.findColor();
@@ -45,6 +56,7 @@ export default class Cell {
     if (this.flag) {
       this.$cell.classList.add('flag');
       this.$cell.removeEventListener('click', this.handlers.click);
+      this.playAudio(flagAudio);
     }
     if (this.$cell.classList.contains('flag') && !this.flag) {
       this.$cell.classList.remove('flag');
@@ -58,8 +70,7 @@ export default class Cell {
     img.src = bombImg;
     img.classList.add('cell-bomb');
     this.$cell.append(img);
-    const audio = new Audio(boom, { type: 'audio/mpeg' });
-    audio.play();
+    this.playAudio(boomAudio);
   }
 
   createDomCell() {

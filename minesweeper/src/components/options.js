@@ -18,6 +18,8 @@ export default class Options {
     if (bombs) localStorage.setItem('_bombs', bombs);
     if (theme) localStorage.setItem('_theme', theme);
     if (sound) localStorage.setItem('_sound', sound);
+    this.changeTheme(theme);
+
     this.changeOptions = true;
   }
 
@@ -30,7 +32,7 @@ export default class Options {
     const options = {
       username: localUser || 'User',
       level: localLvl || 'easy',
-      bombs: localBombs || 10,
+      bombs: +localBombs || 10,
       theme: localTheme || 'light',
       sound: localSound || 'on',
     };
@@ -64,5 +66,12 @@ export default class Options {
 
   getAreaData() {
     return this.areaData;
+  }
+
+  changeTheme(theme) {
+    const { body } = document;
+    if (theme === 'dark') body.classList.add('dark');
+    if (theme === 'light') body.classList.remove('dark');
+    this.theme = theme;
   }
 }

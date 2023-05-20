@@ -1,3 +1,12 @@
+body {
+  --main-color: #46616d;
+  --score-text: #617e8c;
+
+  &.dark {
+    --main-color: #fff;
+    --score-text: #fff;
+  }
+}
 .score-section {
   display: flex;
   flex-direction: column;
@@ -18,14 +27,19 @@
       font-size: 0.6rem;
       line-height: 0.6rem;
       text-transform: lowercase;
-      color: rgba(70, 97, 110, 0.6);
+      color: var(--main-color);
+      opacity: 0.5;
     }
     .name {
       font-weight: 300;
       font-size: 1.1rem;
       line-height: 1.1rem;
       text-transform: uppercase;
-      color: #46616d;
+      color: var(--main-color);
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      max-width: 9rem;
     }
   }
   .score-panel {
@@ -98,7 +112,7 @@
     display: flex;
     min-width: 0.8rem;
     min-height: 0.8rem;
-    color: #617e8c;
+    color: var(--main-color);
     transition: 0.3s;
     border-radius: 50%;
   }
@@ -111,8 +125,8 @@
       gap: 4px;
       padding: 0 0.4rem;
       &.time {
-        border-left: solid 2px #DFDFDF;
-        border-right: solid 2px #DFDFDF;
+        border-left: solid 2px #dfdfdf;
+        border-right: solid 2px #dfdfdf;
       }
     }
     .icon {
@@ -143,7 +157,7 @@
       font-size: 1rem;
       line-height: 1rem;
       text-transform: uppercase;
-      color: #617e8c;
+      color: var(--score-text);
     }
   }
 }

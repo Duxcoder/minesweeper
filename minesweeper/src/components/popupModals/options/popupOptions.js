@@ -122,10 +122,19 @@ export default class PopupOptions {
   }
 
   acceptOptions(options) {
-    const setOptions = Object.entries(isSetOptionsDef);
+    const setOptions = Object.entries(this.isSetOptions);
     setOptions.forEach((item) => {
       const prop = item[0];
       if (item[1]) options.setOptions({ [prop]: item[1] });
+    });
+    this.options = isSetOptionsDef;
+  }
+
+  cancelAccept(options) {
+    const setOptions = Object.entries(this.isSetOptions);
+    setOptions.forEach((item) => {
+      const prop = item[0];
+      this.isSetOptions[prop] = options.getOptions().prop;
     });
     this.options = isSetOptionsDef;
   }
@@ -257,6 +266,7 @@ export default class PopupOptions {
       this.acceptOptions(options);
     };
     $cancel.onclick = () => {
+      this.cancelAccept(options);
       clearPopup();
       runClose();
     };

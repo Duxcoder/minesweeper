@@ -4,6 +4,7 @@
   justify-content: center;
   margin: 0 auto;
 }
+
 .logo {
   position: relative;
   margin-bottom: 20px;
@@ -48,4 +49,15 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+
+/// Dark theme
+
+.dark {
+  .logo {
+    background: linear-gradient(123.94deg, #ffc008 31.4%, #ffffff 70.11%), #455A64;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }

@@ -72,5 +72,6 @@ export default class Popup {
     body.style.overflow = 'auto';
     this.$modal.innerHTML = '';
     this.$modal.classList.remove('modal-show', 'option');
+    this.popupOptions.cancelAccept(this.options);
   }
 }

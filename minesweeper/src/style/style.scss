@@ -8,6 +8,9 @@ html {
 body {
   display: flex;
   flex-direction: column;
+  &.dark {
+    filter: grayscale(0.5);
+  }
 }
 ul,
 li {
