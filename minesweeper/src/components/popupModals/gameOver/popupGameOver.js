@@ -1,5 +1,12 @@
 import './style.scss';
 
+const addZero = (num) => {
+  if (num > 999) return '999+';
+  if (num < 10) return `00${num}`;
+  if (num > 9 && num < 100) return `0${num}`;
+  return num;
+};
+
 export default class PopupGameOver {
   constructor(restart) {
     this.result = null;
@@ -40,21 +47,17 @@ export default class PopupGameOver {
             <ul class="score-list">
               <li class="score-item click">
                 <span class="icon icon-click"></span>
-                <span class="score-text score-click">010</span>
+                <span class="score-text score-click">${addZero(localStorage.getItem('_clicks'))}</span>
               </li>
               <li class="score-item time">
                 <span class="icon icon-time"></span>
-                <span class="score-text score-time">010</span>
-              </li>
-              <li class="score-item bombs">
-                <span class="icon icon-bombs"></span>
-                <span class="score-text score-bombs">010</span>
+                <span class="score-text score-time">${addZero(localStorage.getItem('_time'))}</span>
               </li>
             </ul>
           </div>
           <div class="btns-boards">
-            <button class="btn btn-white">Recent matches</button>
-            <button class="btn btn-white">Leaderboard</button>
+            <button class="btn btn-white">not implemented :(</button>
+            <button class="btn btn-white">not implemented :(</button>
           </div>
     `;
     $container.innerHTML = $content;

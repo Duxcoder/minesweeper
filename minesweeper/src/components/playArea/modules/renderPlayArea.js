@@ -23,10 +23,6 @@ export default class RenderPlayArea {
     return $area;
   }
 
-  updateRender() {
-    console.log(this.container);
-  }
-
   renderCells(container) {
     const $cells = [];
     const cells = this.area.map((rowArea, r) => rowArea.map((cell, c) => { // r - row; c - column

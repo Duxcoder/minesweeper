@@ -264,6 +264,8 @@ export default class PopupOptions {
     const $cancel = createDomElement('button', ['btn-options', 'cancel'], 'Cancel');
     $accept.onclick = () => {
       this.acceptOptions(options);
+      clearPopup();
+      runClose();
     };
     $cancel.onclick = () => {
       this.cancelAccept(options);

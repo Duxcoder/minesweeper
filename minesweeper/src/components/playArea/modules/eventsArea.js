@@ -28,6 +28,7 @@ export default class EventsArea {
     this.time = null;
     this.timer = null;
     this.bombs = null;
+    this.clicks = 0;
     this.audio = [];
     this.options = options;
   }
@@ -43,6 +44,7 @@ export default class EventsArea {
     this.time = 0;
     const timer = setInterval(() => {
       this.time += 1;
+      localStorage.setItem('_time', this.time);
       this.score.updateTime(this.time);
       this.score.updateScorePanel();
     }, 1000);
@@ -66,10 +68,37 @@ export default class EventsArea {
           const cell = renderAreaClass.cells[indexRow][indexColumn];
           this.firstClickCellPosition = [indexRow, indexColumn];
           this.timer = this.startTimer();
+          this.clicks += 1;
+          this.score.updateClick(this.clicks);
+          this.score.updateScorePanel();
           cell.open = true;
           cell.updateCell();
           callback([this.firstClickCellPosition]);
           this.openCellsAround(renderAreaClass);
+
+          if (localStorage.getItem('_bombs')) {
+            if (+localStorage.getItem('_bombs') === 99) {
+              this.stopTimer();
+              this.playAudio(winAudio);
+              localStorage.setItem('_clicks', this.clicks);
+              const date = new Date();
+              const user = [
+                +date,
+                localStorage.getItem('_username') ? localStorage.getItem('_username') : 'user',
+                localStorage.getItem('_level') ? localStorage.getItem('_level') : 'easy',
+                this.clicks,
+                localStorage.getItem('_bombs') ? localStorage.getItem('_bombs') : '10',
+              ];
+              let table = [];
+              if (localStorage.getItem('_table')) {
+                table = JSON.parse(localStorage.getItem('_table'));
+              }
+              table.push(user);
+              localStorage.setItem('_table', JSON.stringify(table));
+              this.popup.runGameOver('win');
+            }
+          }
+
           $area.removeEventListener('click', handler);
         }
       });
@@ -108,7 +137,6 @@ export default class EventsArea {
   }
 
   clickTracking($area, renderAreaClass) {
-    let clicks = 0;
     const { cells } = renderAreaClass;
     const totalArrayCells = cells.reduce((arr, row) => [...arr, ...row], []);
     const bombs = totalArrayCells.filter((cell) => cell.bomb);
@@ -118,8 +146,8 @@ export default class EventsArea {
       const { $cell } = cell;
       if (target === $cell) {
         if (!cellElem.open) {
-          clicks += 1;
-          this.score.updateClick(clicks);
+          this.clicks += 1;
+          this.score.updateClick(this.clicks);
           this.score.updateScorePanel();
         }
         cellElem.open = true;
@@ -128,12 +156,28 @@ export default class EventsArea {
         if (!isContainsEmptyCells) {
           this.stopTimer();
           this.playAudio(winAudio);
+          localStorage.setItem('_clicks', this.clicks);
+          const date = new Date();
+          const user = [
+            +date,
+            localStorage.getItem('_username') ? localStorage.getItem('_username') : 'user',
+            localStorage.getItem('_level') ? localStorage.getItem('_level') : 'easy',
+            this.clicks,
+            localStorage.getItem('_bombs') ? localStorage.getItem('_bombs') : '10',
+          ];
+          let table = [];
+          if (localStorage.getItem('_table')) {
+            table = JSON.parse(localStorage.getItem('_table'));
+          }
+          table.push(user);
+          localStorage.setItem('_table', JSON.stringify(table));
           this.popup.runGameOver('win');
         }
         if (cellElem.bomb) {
           cascadeOfExplosions(bombs, cellElem);
           this.stopTimer();
           this.playAudio(loseAudio);
+          localStorage.setItem('_clicks', this.clicks);
           this.popup.runGameOver('lose');
         }
         if (!cellElem.number && !cellElem.bomb) {

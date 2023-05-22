@@ -1,6 +1,7 @@
 import './style.scss';
 import PopupGameOver from './gameOver/popupGameOver';
 import PopupOptions from './options/popupOptions';
+import PopupTable from './table/popupTable';
 
 export default class Popup {
   constructor(restart, optionsInst) {
@@ -8,6 +9,7 @@ export default class Popup {
     this.$modal = null;
     this.popupGameOver = new PopupGameOver(restart);
     this.popupOptions = new PopupOptions();
+    this.popupTable = new PopupTable();
     this.result = null;
     this.options = optionsInst;
   }
@@ -67,11 +69,20 @@ export default class Popup {
     this.$modal.classList.add('modal-show', 'option');
   }
 
+  runTable() {
+    const { body } = document;
+    body.style.overflow = 'hidden';
+    const popupTable = this.popupTable.render();
+    const permissionClose = !this.gameOver;
+    this.renderPopup(popupTable, permissionClose);
+    this.$modal.classList.add('modal-show', 'table');
+  }
+
   hidePopup() {
     const { body } = document;
     body.style.overflow = 'auto';
     this.$modal.innerHTML = '';
-    this.$modal.classList.remove('modal-show', 'option');
+    this.$modal.classList.remove('modal-show', 'option', 'table');
     this.popupOptions.cancelAccept(this.options);
   }
 }

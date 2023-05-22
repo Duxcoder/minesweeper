@@ -45,7 +45,7 @@ export default class Cell {
       this.$cell.classList.add('open');
       this.playAudio(cellAudio);
     }
-    if (this.number && this.open) { // && this.open
+    if (this.number && this.open) {
       this.$cell.style.color = this.findColor();
       this.$cell.textContent = this.number;
     }

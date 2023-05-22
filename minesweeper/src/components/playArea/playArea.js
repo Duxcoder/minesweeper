@@ -19,6 +19,7 @@ export default class PlayArea {
     this.score = score;
     this.area = [];
     this.$renderArea = null;
+    this.renderAreaClass = null;
     this.events = new EventsArea(popup, score, options);
   }
 
@@ -55,7 +56,6 @@ export default class PlayArea {
   }
 
   createBombs(areaCells, countBombs, exception = false) {
-    console.log(exception);
     const area = areaCells;
     const cellsBombs = [];
     let count = 0;
@@ -80,7 +80,6 @@ export default class PlayArea {
   plusOneAroundBomb(cells, bombsArr) {
     const newCells = cells;
     newCells.plusOne = function plusOne(row, column) {
-      // const cell = this[row][column];
       const isBomb = bombsArr.find((bombCell) => {
         const [bombRow, bombColumn] = bombCell;
         return (bombRow === row && bombColumn === column);

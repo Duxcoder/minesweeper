@@ -13,6 +13,7 @@ export default class Score {
     bombs = 0,
     options,
     restart,
+    popupInst,
   }) {
     this.$scoreSection = null;
     this.$descriptionPanel = null;
@@ -21,6 +22,7 @@ export default class Score {
     this.bombs = bombs;
     this.options = options;
     this.restart = restart;
+    this.popupInst = popupInst;
   }
 
   updateScorePanel() {
@@ -36,6 +38,7 @@ export default class Score {
         <li class="score-item bombs">
           <span class="icon icon-bombs"></span>
           <span class="score-text score-bombs">${addZero(this.bombs)}</span>
+          <span class="icon icon-flag"></span>
         </li>`;
     this.$scorePanel.innerHTML = content;
   }
@@ -53,6 +56,14 @@ export default class Score {
   }
 
   getDescriptionPanel() {
+    const $btnTable = document.createElement('button');
+    $btnTable.classList.add('btn', 'btn-white', 'btn-rules');
+    $btnTable.innerHTML = `
+    <span class="icon-rules">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 50 50" ><path d="M 7 2 L 7 48 L 43 48 L 43 14.59375 L 42.71875 14.28125 L 30.71875 2.28125 L 30.40625 2 Z M 9 4 L 29 4 L 29 16 L 41 16 L 41 46 L 9 46 Z M 31 5.4375 L 39.5625 14 L 31 14 Z M 15 22 L 15 24 L 35 24 L 35 22 Z M 15 28 L 15 30 L 31 30 L 31 28 Z M 15 34 L 15 36 L 35 36 L 35 34 Z"/></svg>
+  </span>
+  <span class="text-rules">TABLE</span>`;
+
     const $descriptionPanel = document.createElement('div');
     $descriptionPanel.classList.add('description-panel');
     const $btnRestart = document.createElement('button');
@@ -68,15 +79,10 @@ export default class Score {
     <div class="name-block">
       <div class="name-label">playername:</div>
       <div class="name">${localStorage.getItem('_username') ? localStorage.getItem('_username') : 'USER'}</div>
-    </div>
-    <button class="btn btn-white btn-rules">
-        <span class="icon-rules">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 50 50" ><path d="M 7 2 L 7 48 L 43 48 L 43 14.59375 L 42.71875 14.28125 L 30.71875 2.28125 L 30.40625 2 Z M 9 4 L 29 4 L 29 16 L 41 16 L 41 46 L 9 46 Z M 31 5.4375 L 39.5625 14 L 31 14 Z M 15 22 L 15 24 L 35 24 L 35 22 Z M 15 28 L 15 30 L 31 30 L 31 28 Z M 15 34 L 15 36 L 35 36 L 35 34 Z"/></svg>
-        </span>
-        <span class="text-rules">RULES</span>
-      </button>`;
+    </div>`;
+    $btnTable.addEventListener('click', () => this.popupInst.runTable());
     $descriptionPanel.innerHTML = content;
-    $descriptionPanel.append($btnRestart);
+    $descriptionPanel.append($btnTable, $btnRestart);
     this.$descriptionPanel = $descriptionPanel;
     return $descriptionPanel;
   }
@@ -97,6 +103,7 @@ export default class Score {
         <li class="score-item bombs">
           <span class="icon icon-bombs"></span>
           <span class="score-text score-bombs">${addZero(this.bombs)}</span>
+          <span class="icon icon-flag"></span>
         </li>`;
     $scorePanel.innerHTML = content;
     this.$scorePanel = $scorePanel;

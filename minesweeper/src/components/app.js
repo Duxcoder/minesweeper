@@ -10,7 +10,7 @@ export default class Manager {
   constructor() {
     this.options = new Options();
     this.popup = new Popup(this.restart.bind(this), this.options);
-    this.score = new Score({ options: this.options, restart: this.restart.bind(this) });
+    this.score = new Score({ options: this.options, restart: this.restart.bind(this), popupInst: this.popup });
     this.area = new PlayArea(this.popup, this.score, this.options);
   }
 
@@ -27,7 +27,7 @@ export default class Manager {
     document.body.style.overflow = '';
     this.options = new Options();
     this.popup = new Popup(this.restart.bind(this), this.options);
-    this.score = new Score({ options: this.options, restart: this.restart.bind(this) });
+    this.score = new Score({ options: this.options, restart: this.restart.bind(this), popupInst: this.popup });
     this.area = new PlayArea(this.popup, this.score, this.options);
     this.startGame();
   }
