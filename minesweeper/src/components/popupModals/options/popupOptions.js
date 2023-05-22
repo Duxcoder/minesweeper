@@ -266,6 +266,7 @@ export default class PopupOptions {
       this.acceptOptions(options);
       clearPopup();
       runClose();
+      this.restart();
     };
     $cancel.onclick = () => {
       this.cancelAccept(options);

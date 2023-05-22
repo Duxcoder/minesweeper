@@ -8,7 +8,7 @@ export default class Popup {
     this.gameOver = false;
     this.$modal = null;
     this.popupGameOver = new PopupGameOver(restart);
-    this.popupOptions = new PopupOptions();
+    this.popupOptions = new PopupOptions(restart);
     this.popupTable = new PopupTable();
     this.result = null;
     this.options = optionsInst;
