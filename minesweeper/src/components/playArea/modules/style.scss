@@ -56,12 +56,16 @@
   border-radius: 20px;
   padding: 20px;
   width: fit-content;
-  grid-template-columns: repeat(var(--column), clamp(36px, 2.4vw, 48px));
-  grid-template-rows: repeat(var(--row), clamp(36px, 2.4vw, 48px));
-  @include _990 {
-    grid-template-columns: repeat(var(--column), clamp(24px, 5vw, 36px));
-    grid-template-rows: repeat(var(--row), clamp(24px, 5vw, 36px));
-  }
+  width: calc(1rem * var(--column));
+  height: calc(1rem * var(--row));
+  grid-template-columns: repeat(var(--column), clamp(14px, calc(100% / var(--column)), 36px));
+  grid-template-rows: repeat(var(--row), clamp(14px, calc(100% / var(--row)), 36px))
+  // grid-template-columns: repeat(var(--column), clamp(36px, 2.4vw, 48px));
+  // grid-template-rows: repeat(var(--row), clamp(36px, 2.4vw, 48px));
+  // @include _990 {
+  //   grid-template-columns: repeat(var(--column), clamp(24px, 5vw, 36px));
+  //   grid-template-rows: repeat(var(--row), clamp(24px, 5vw, 36px));
+  // }
 }
 
 .cell {
