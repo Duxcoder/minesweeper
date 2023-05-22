@@ -22,7 +22,6 @@ export default class Manager {
   }
 
   restart() {
-    console.log('restart');
     document.body.innerHTML = '';
     document.body.style.overflow = '';
     this.options = new Options();

@@ -41,7 +41,6 @@ export default class RenderPlayArea {
     }));
     this.$cells = $cells;
     this.cells = cells;
-    console.log(cells);
     return $cells;
   }
 }

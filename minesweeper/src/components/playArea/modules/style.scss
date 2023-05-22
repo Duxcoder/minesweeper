@@ -85,6 +85,7 @@
   transition: 0.3s;
   &.close {
     &.light {
+      border-bottom: solid 4px transparent;
       background: linear-gradient(180deg, #5c7784 0%, #567a8b 100%);
       &:hover {
         box-shadow: inset 0px 0px 2px 2px #445f6d;
@@ -141,7 +142,7 @@
     content: "";
     position: absolute;
     top: -20%;
-    right: -24%;
+    right: 0;
     width: 86%;
     height: 86%;
     background-image: url("../assets/img/flag.png");
