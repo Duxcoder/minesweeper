@@ -262,6 +262,10 @@ export default class PopupOptions {
     const $btns = createDomElement('div', ['btns']);
     const $accept = createDomElement('button', ['btn-options', 'accept'], 'Accept');
     const $cancel = createDomElement('button', ['btn-options', 'cancel'], 'Cancel');
+    $accept.addEventListener('click', () => {
+      const stopEvent = new CustomEvent('stopTimerEvent');
+      document.dispatchEvent(stopEvent);
+    });
     $accept.onclick = () => {
       this.acceptOptions(options);
       clearPopup();

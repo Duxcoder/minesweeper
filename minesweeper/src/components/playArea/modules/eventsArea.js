@@ -58,6 +58,11 @@ export default class EventsArea {
   firstClickOnArea($area, renderAreaClass, callback) {
     this.$area = $area;
     this.bombs = this.score.bombs;
+    /// stop timer when restart
+    document.addEventListener('stopTimerEvent', () => {
+      this.stopTimer();
+    });
+    ///
     const handler = (e) => {
       renderAreaClass.$cells.forEach(($cell, i) => {
         if (e.target === $cell) {
