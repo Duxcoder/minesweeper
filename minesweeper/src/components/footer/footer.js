@@ -1,12 +1,12 @@
 import './style.scss';
+import nodeCreator from '../../utils/utils';
 
 function footer(popupInst) {
   const $body = document.body;
-  const $footer = document.createElement('footer');
-  $footer.classList.add('footer');
-  const $btnOption = document.createElement('button');
-  $btnOption.classList.add('btn', 'btn-transparent');
-  $btnOption.innerHTML = `
+  const footerContent = `
+  <a class="keks" target = "_blank" href="https://github.com/Duxcoder">duxcoder</a>
+  `;
+  const btnOptionContent = `
     <span class="icon-option">
       <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 50 50">
         <path
@@ -16,9 +16,8 @@ function footer(popupInst) {
     </span>
     settings
     `;
-  $footer.innerHTML = `
-  <a class="keks" target = "_blank" href="https://github.com/Duxcoder">duxcoder</a>
-  `;
+  const $footer = nodeCreator('footer', ['footer'], footerContent);
+  const $btnOption = nodeCreator('button', ['btn', 'btn-transparent'], btnOptionContent);
   $footer.append($btnOption);
   $body.append($footer);
 
