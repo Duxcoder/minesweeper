@@ -25,20 +25,25 @@ export default class RenderPlayArea {
 
   renderCells(container) {
     const $cells = [];
-    const cells = this.area.map((rowArea, r) => rowArea.map((cell, c) => { // r - row; c - column
+
+    const renderCell = (cell, column, row) => {
       const options = {
         open: false,
-        dark: ((r % 2) && ((c + 1) % 2)) || (((r + 1) % 2) && ((c) % 2)),
-        row: r,
-        column: c,
+        dark: (row % 2 && (column + 1) % 2) || ((row + 1) % 2 && column % 2),
         number: cell,
+        row,
+        column,
       };
       const cellClass = new Cell(options);
       const $cell = cellClass.createDomCell();
       $cells.push($cell);
       container.append($cell);
       return cellClass;
-    }));
+    };
+
+    const renderCellRow = (rowArea, row) => rowArea.map((cell, col) => renderCell(cell, col, row));
+
+    const cells = this.area.map(renderCellRow);
     this.$cells = $cells;
     this.cells = cells;
     return $cells;

@@ -1,15 +1,12 @@
 import EventsArea from './modules/eventsArea';
 import RenderPlayArea from './modules/renderPlayArea';
+import { getRandomNum } from '../../utils/utils';
 
-function getRandomNum(from, to) {
-  const rand = from + Math.random() * (to + 1 - from);
-  return Math.floor(rand);
-}
 const isExceptions = (exception, randRow, randColumn) => {
   if (!exception) return false;
   return exception.some((cellException) => {
     const [cellRowException, cellColumnException] = cellException;
-    return (cellRowException === randRow && cellColumnException === randColumn);
+    return cellRowException === randRow && cellColumnException === randColumn;
   });
 };
 
@@ -82,7 +79,7 @@ export default class PlayArea {
     newCells.plusOne = function plusOne(row, column) {
       const isBomb = bombsArr.find((bombCell) => {
         const [bombRow, bombColumn] = bombCell;
-        return (bombRow === row && bombColumn === column);
+        return bombRow === row && bombColumn === column;
       });
       if (isBomb) return;
       if (this[row] && this[row][column]) {

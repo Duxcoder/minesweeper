@@ -1,5 +1,5 @@
 import './style.scss';
-import nodeCreator from '../../utils/utils';
+import { nodeCreator } from '../../utils/utils';
 
 function footer(popupInst) {
   const $body = document.body;
