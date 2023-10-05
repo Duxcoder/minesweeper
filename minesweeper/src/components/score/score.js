@@ -7,14 +7,7 @@ const addZero = (num) => {
   return num;
 };
 export default class Score {
-  constructor({
-    clicks = 0,
-    time = 0,
-    bombs = 0,
-    options,
-    restart,
-    popupInst,
-  }) {
+  constructor({ clicks = 0, time = 0, bombs = 0, options, restart, popupInst }) {
     this.$scoreSection = null;
     this.$descriptionPanel = null;
     this.clicks = clicks;
@@ -38,7 +31,6 @@ export default class Score {
         <li class="score-item bombs">
           <span class="icon icon-bombs"></span>
           <span class="score-text score-bombs">${addZero(this.bombs)}</span>
-          <span class="icon icon-flag"></span>
         </li>`;
     this.$scorePanel.innerHTML = content;
   }
@@ -82,7 +74,9 @@ export default class Score {
     const content = `
     <div class="name-block">
       <div class="name-label">playername:</div>
-      <div class="name">${localStorage.getItem('_username') ? localStorage.getItem('_username') : 'USER'}</div>
+      <div class="name">
+      ${localStorage.getItem('_username') ? localStorage.getItem('_username') : 'USER'}
+      </div>
     </div>`;
     $btnTable.addEventListener('click', () => this.popupInst.runTable());
     $descriptionPanel.innerHTML = content;
@@ -107,7 +101,6 @@ export default class Score {
         <li class="score-item bombs">
           <span class="icon icon-bombs"></span>
           <span class="score-text score-bombs">${addZero(this.bombs)}</span>
-          <span class="icon icon-flag"></span>
         </li>`;
     $scorePanel.innerHTML = content;
     this.$scorePanel = $scorePanel;
