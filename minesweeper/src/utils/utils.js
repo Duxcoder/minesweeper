@@ -9,3 +9,9 @@ export function getRandomNum(from, to) {
   const rand = from + Math.random() * (to + 1 - from);
   return Math.floor(rand);
 }
+
+export function playAudio(name) {
+  const audio = new Audio(name, { type: 'audio/mpeg' });
+  const isMuted = localStorage.getItem('_sound') === 'off';
+  if (!isMuted) audio.play();
+}
