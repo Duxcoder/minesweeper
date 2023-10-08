@@ -25,7 +25,8 @@ module.exports = {
     clean: true,
     assetModuleFilename: 'assets/[name].[hash][ext]',
   },
-  plugins: [new ESLintPlugin(),
+  plugins: [
+    new ESLintPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src', 'index.html'),
     }),
@@ -41,10 +42,7 @@ module.exports = {
       },
       {
         test: /\.(c|sa|sc)ss$/i,
-        use: [devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
-          'sass-loader',
-        ],
+        use: [devMode ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
         test: /\.(?:js|mjs|cjs)$/,
@@ -52,35 +50,35 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: [
-              ['@babel/preset-env', { targets: 'defaults' }],
-            ],
+            presets: [['@babel/preset-env', { targets: 'defaults' }]],
           },
         },
       },
       {
         test: /\.(jpe?g|png|webp|svg|gif|svg)$/i,
-        use: [{
-          loader: 'image-webpack-loader',
-          options: {
-            mozjpeg: {
-              progressive: true,
-            },
-            optipng: {
-              enabled: false,
-            },
-            pngquant: {
-              quality: [0.65, 0.90],
-              speed: 4,
-            },
-            gifsicle: {
-              interlaced: false,
-            },
-            webp: {
-              quality: 75,
+        use: [
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              mozjpeg: {
+                progressive: true,
+              },
+              optipng: {
+                enabled: false,
+              },
+              pngquant: {
+                quality: [0.65, 0.9],
+                speed: 4,
+              },
+              gifsicle: {
+                interlaced: false,
+              },
+              webp: {
+                quality: 75,
+              },
             },
           },
-        }],
+        ],
         type: 'asset/resource',
       },
       {
