@@ -2,23 +2,31 @@ import bombImg from '../../../assets/img/bomb.png';
 import boomAudio from '../../../assets/audio/boom.mp3';
 import cellAudio from '../../../assets/audio/cell.mp3';
 import flagAudio from '../../../assets/audio/flag.mp3';
+import disabledAudio from '../../../assets/audio/disabled.mp3';
+import { playAudio } from '../../../utils/utils';
 
 const defOptions = {
   flag: null,
   bomb: null,
-  explosion: false,
   open: false,
   dark: false,
   number: 0,
   row: null,
   column: null,
 };
-const colorsNumbers = ['#46616F', '#59A834', '#34B4BC', '#A934BC', '#6D17DA', '#BC3434', '#E48B21', '#000000'];
+const colorsNumbers = [
+  '#46616F',
+  '#59A834',
+  '#34B4BC',
+  '#A934BC',
+  '#6D17DA',
+  '#BC3434',
+  '#E48B21',
+  '#000000',
+];
 
 export default class Cell {
-  constructor({
-    flag, bomb, explosion, open, dark, number, row, column,
-  } = defOptions) {
+  constructor({ flag, bomb, explosion, open, dark, number, row, column } = defOptions) {
     this.flag = flag;
     this.bomb = bomb;
     this.explosion = explosion;
@@ -29,34 +37,33 @@ export default class Cell {
     this.column = column;
     this.$cell = null;
     this.handlers = null;
-    this.audio = [];
   }
 
-  playAudio(name) {
-    const audio = new Audio(name, { type: 'audio/mpeg' });
-    const isMuted = localStorage.getItem('_sound') === 'off';
-    if (!isMuted) audio.play();
-    this.audio.push(audio);
+  openCell(openMusic = true) {
+    if (this.number) {
+      this.$cell.style.color = this.findColor();
+      this.$cell.textContent = this.number;
+    }
+    if (this.open) {
+      playAudio(disabledAudio);
+    } else {
+      this.$cell.classList.remove('close');
+      this.$cell.classList.add('open');
+      if (openMusic) playAudio(cellAudio);
+    }
+    this.open = true;
   }
 
   updateCell() {
-    if (this.open) {
-      this.$cell.classList.remove('close');
-      this.$cell.classList.add('open');
-      this.playAudio(cellAudio);
-    }
+    // if (this.open) this.openCell();
     if (this.number && this.open) {
       this.$cell.style.color = this.findColor();
       this.$cell.textContent = this.number;
     }
-    if (this.bomb && this.open && !this.explosion) {
-      this.explosion = true;
-      this.explosionBomb();
-    }
     if (this.flag) {
       this.$cell.classList.add('flag');
       this.$cell.removeEventListener('click', this.handlers.click);
-      this.playAudio(flagAudio);
+      playAudio(flagAudio);
     }
     if (this.$cell.classList.contains('flag') && !this.flag) {
       this.$cell.classList.remove('flag');
@@ -64,13 +71,18 @@ export default class Cell {
     }
   }
 
-  explosionBomb() {
+  showBomb() {
+    this.openCell(false);
     this.$cell.classList.add('bomb');
     const img = new Image();
     img.src = bombImg;
     img.classList.add('cell-bomb');
     this.$cell.append(img);
-    this.playAudio(boomAudio);
+  }
+
+  explosionBomb() {
+    playAudio(boomAudio);
+    this.showBomb();
   }
 
   createDomCell() {

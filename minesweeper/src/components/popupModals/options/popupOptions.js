@@ -195,8 +195,8 @@ export default class PopupOptions {
     $input.max = 99;
     const setPosition = (value = $input.value) => {
       $input.value = value;
-      const position = (value / $input.max);
-      $count.style.left = `${(position * 7) - 1.07}rem`;
+      const position = value / $input.max;
+      $count.style.left = `${position * 7 - 1.07}rem`;
     };
     setPosition(options.getOptions().bombs);
     $input.oninput = () => {
@@ -244,9 +244,7 @@ export default class PopupOptions {
   }
 
   render(option) {
-    const {
-      runClose, clearPopup, options,
-    } = option;
+    const { runClose, clearPopup, options } = option;
     const $container = document.createElement('div');
     $container.classList.add('container');
     const $optionList = document.createElement('ul');

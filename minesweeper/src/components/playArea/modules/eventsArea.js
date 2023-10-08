@@ -1,23 +1,14 @@
 import winAudio from '../../../assets/audio/win.wav';
 import loseAudio from '../../../assets/audio/lose.mp3';
-
-function getRandomNum(from, to) {
-  const rand = from + Math.random() * (to + 1 - from);
-  return Math.floor(rand);
-}
+import { getRandomNum, playAudio } from '../../../utils/utils';
 
 function cascadeOfExplosions(bombs, clickCell) {
-  bombs.forEach((bomb) => {
-    const second = getRandomNum(1, 10);
-    if (clickCell !== bomb) {
-      setTimeout(() => {
-        const bombElem = bomb;
-        bombElem.open = true;
-        bombElem.updateCell();
-      }, second * 100);
-    }
-  });
+  const remainingBombs = bombs.filter((bomb) => clickCell !== bomb);
+  remainingBombs.forEach((bomb) =>
+    setTimeout(() => bomb.showBomb(false), getRandomNum(1, 10) * 100),
+  );
 }
+
 export default class EventsArea {
   constructor(popup, score, options) {
     this.popup = popup;
@@ -29,15 +20,7 @@ export default class EventsArea {
     this.timer = null;
     this.bombs = null;
     this.clicks = 0;
-    this.audio = [];
     this.options = options;
-  }
-
-  playAudio(name) {
-    const audio = new Audio(name, { type: 'audio/mpeg' });
-    const isMuted = localStorage.getItem('_sound') === 'off';
-    if (!isMuted) audio.play();
-    this.audio.push(audio);
   }
 
   startTimer() {
@@ -69,22 +52,21 @@ export default class EventsArea {
           const { cells } = renderAreaClass;
           this.cells = cells;
           const indexRow = Math.floor(i / cells.length);
-          const indexColumn = Math.floor((i % cells[0].length));
+          const indexColumn = Math.floor(i % cells[0].length);
           const cell = renderAreaClass.cells[indexRow][indexColumn];
           this.firstClickCellPosition = [indexRow, indexColumn];
           this.timer = this.startTimer();
           this.clicks += 1;
           this.score.updateClick(this.clicks);
           this.score.updateScorePanel();
-          cell.open = true;
-          cell.updateCell();
+          cell.openCell();
           callback([this.firstClickCellPosition]);
           this.openCellsAround(renderAreaClass);
 
           if (localStorage.getItem('_bombs')) {
             if (+localStorage.getItem('_bombs') === 99) {
               this.stopTimer();
-              this.playAudio(winAudio);
+              playAudio(winAudio);
               localStorage.setItem('_clicks', this.clicks);
               const date = new Date();
               const user = [
@@ -128,12 +110,14 @@ export default class EventsArea {
         const [correctiveRow, correctiveColumn] = correctivePositionRowColumn[i];
         const correctRow = correctiveRow + row;
         const correctColumn = correctiveColumn + column;
-        if (renderAreaClass.cells[correctRow] && renderAreaClass.cells[correctRow][correctColumn]
-          && !renderAreaClass.cells[correctRow][correctColumn].open) {
+        if (
+          renderAreaClass.cells[correctRow] &&
+          renderAreaClass.cells[correctRow][correctColumn] &&
+          !renderAreaClass.cells[correctRow][correctColumn].open
+        ) {
           const aroundCell = renderAreaClass.cells[correctRow][correctColumn];
           if (!aroundCell.bomb && !renderAreaClass.cells[row][column].number) {
-            aroundCell.open = true;
-            aroundCell.updateCell();
+            aroundCell.openCell(false);
             this.openCellsAround(renderAreaClass, [correctRow, correctColumn]);
           }
         }
@@ -155,12 +139,11 @@ export default class EventsArea {
           this.score.updateClick(this.clicks);
           this.score.updateScorePanel();
         }
-        cellElem.open = true;
-        cellElem.updateCell();
+        cellElem.openCell();
         const isContainsEmptyCells = totalArrayCells.some((item) => !item.open && !item.bomb);
         if (!isContainsEmptyCells) {
           this.stopTimer();
-          this.playAudio(winAudio);
+          playAudio(winAudio);
           localStorage.setItem('_clicks', this.clicks);
           const date = new Date();
           const user = [
@@ -179,9 +162,10 @@ export default class EventsArea {
           this.popup.runGameOver('win');
         }
         if (cellElem.bomb) {
+          cellElem.explosionBomb();
           cascadeOfExplosions(bombs, cellElem);
           this.stopTimer();
-          this.playAudio(loseAudio);
+          playAudio(loseAudio);
           localStorage.setItem('_clicks', this.clicks);
           this.popup.runGameOver('lose');
         }

@@ -10,9 +10,7 @@ export default class Options {
     this.areaData = null;
   }
 
-  setOptions({
-    username, level, bombs, theme, sound,
-  }) {
+  setOptions({ username, level, bombs, theme, sound }) {
     if (username) localStorage.setItem('_username', username);
     if (level) localStorage.setItem('_level', level);
     if (bombs) localStorage.setItem('_bombs', bombs);

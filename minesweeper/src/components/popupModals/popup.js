@@ -55,12 +55,14 @@ export default class Popup {
     this.$modal.classList.add('modal-show');
   }
 
-  runOptions(option = {
-    options: this.options,
-    username: localStorage.getItem('_username'),
-    clearPopup: this.hidePopup.bind(this),
-    runClose: this.result ? this.runGameOver.bind(this, this.result) : this.hidePopup.bind(this),
-  }) {
+  runOptions(
+    option = {
+      options: this.options,
+      username: localStorage.getItem('_username'),
+      clearPopup: this.hidePopup.bind(this),
+      runClose: this.result ? this.runGameOver.bind(this, this.result) : this.hidePopup.bind(this),
+    },
+  ) {
     const { body } = document;
     body.style.overflow = 'hidden';
     const popupOptions = this.popupOptions.render(option);

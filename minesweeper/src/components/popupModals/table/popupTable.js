@@ -58,25 +58,27 @@ export default class PopupTable {
     if (users === '') {
       $tableList.append('no winners');
     } else {
-      users.sort((a, b) => b[0] - a[0]).forEach((item, i) => {
-        if (i < 10) {
-          const $divNumber = createDomElement('div', ['table-item', 'table-num']);
-          $divNumber.textContent = i + 1;
-          const $divName = createDomElement('div', ['table-item', 'table-name']);
-          // eslint-disable-next-line prefer-destructuring
-          $divName.textContent = item[1];
-          const $divLevel = createDomElement('div', ['table-item', 'table-lvl']);
-          // eslint-disable-next-line prefer-destructuring
-          $divLevel.textContent = item[2];
-          const $divClicks = createDomElement('div', ['table-item', 'table-clicks']);
-          // eslint-disable-next-line prefer-destructuring
-          $divClicks.textContent = item[3];
-          const $divBombs = createDomElement('div', ['table-item', 'table-bombs']);
-          // eslint-disable-next-line prefer-destructuring
-          $divBombs.textContent = item[4];
-          $tableList.append($divNumber, $divName, $divLevel, $divClicks, $divBombs);
-        }
-      });
+      users
+        .sort((a, b) => b[0] - a[0])
+        .forEach((item, i) => {
+          if (i < 10) {
+            const $divNumber = createDomElement('div', ['table-item', 'table-num']);
+            $divNumber.textContent = i + 1;
+            const $divName = createDomElement('div', ['table-item', 'table-name']);
+            // eslint-disable-next-line prefer-destructuring
+            $divName.textContent = item[1];
+            const $divLevel = createDomElement('div', ['table-item', 'table-lvl']);
+            // eslint-disable-next-line prefer-destructuring
+            $divLevel.textContent = item[2];
+            const $divClicks = createDomElement('div', ['table-item', 'table-clicks']);
+            // eslint-disable-next-line prefer-destructuring
+            $divClicks.textContent = item[3];
+            const $divBombs = createDomElement('div', ['table-item', 'table-bombs']);
+            // eslint-disable-next-line prefer-destructuring
+            $divBombs.textContent = item[4];
+            $tableList.append($divNumber, $divName, $divLevel, $divClicks, $divBombs);
+          }
+        });
     }
     this.$container = $container;
     return $container;

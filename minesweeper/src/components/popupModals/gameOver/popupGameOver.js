@@ -47,7 +47,9 @@ export default class PopupGameOver {
             <ul class="score-list">
               <li class="score-item click">
                 <span class="icon icon-click"></span>
-                <span class="score-text score-click">${addZero(localStorage.getItem('_clicks'))}</span>
+                <span class="score-text score-click">${addZero(
+                  localStorage.getItem('_clicks'),
+                )}</span>
               </li>
               <li class="score-item time">
                 <span class="icon icon-time"></span>
