@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import PlayArea from './playArea/playArea';
 import Options from './options';
 import Popup from './popupModals/popup';

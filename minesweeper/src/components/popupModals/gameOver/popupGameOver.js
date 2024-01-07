@@ -57,10 +57,6 @@ export default class PopupGameOver {
               </li>
             </ul>
           </div>
-          <div class="btns-boards">
-            <button class="btn btn-white">not implemented :(</button>
-            <button class="btn btn-white">not implemented :(</button>
-          </div>
     `;
     $container.innerHTML = $content;
     $container.append($playAgain);
