@@ -41,7 +41,6 @@ export default class EventsArea {
   firstClickOnArea($area, renderAreaClass, callback) {
     this.$area = $area;
     this.bombs = this.score.bombs;
-    /// stop timer when restart
     document.addEventListener('stopTimerEvent', () => {
       this.stopTimer();
     });
@@ -178,8 +177,8 @@ export default class EventsArea {
       e.preventDefault();
       const { target } = e;
       const cellElem = cell;
-      const { $cell } = cell;
-      if (target === $cell) {
+      const { $cell, open } = cell;
+      if (target === $cell && !open) {
         cellElem.flag = !cellElem.flag;
         cellElem.updateCell();
         this.bombs += cellElem.flag ? -1 : 1;

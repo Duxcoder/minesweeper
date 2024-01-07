@@ -1,5 +1,6 @@
 import bombImg from '../../../assets/img/bomb.png';
 import boomAudio from '../../../assets/audio/boom.mp3';
+import afterBoomAudio from '../../../assets/audio/afterBoom.mp3';
 import cellAudio from '../../../assets/audio/cell.mp3';
 import flagAudio from '../../../assets/audio/flag.mp3';
 import disabledAudio from '../../../assets/audio/disabled.mp3';
@@ -55,7 +56,6 @@ export default class Cell {
   }
 
   updateCell() {
-    // if (this.open) this.openCell();
     if (this.number && this.open) {
       this.$cell.style.color = this.findColor();
       this.$cell.textContent = this.number;
@@ -82,6 +82,7 @@ export default class Cell {
 
   explosionBomb() {
     playAudio(boomAudio);
+    playAudio(afterBoomAudio);
     this.showBomb();
   }
 

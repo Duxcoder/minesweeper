@@ -48,7 +48,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    font-family: "Josefin Sans";
+    font-family: 'Josefin Sans';
     font-style: normal;
     font-weight: 700;
     text-align: right;
@@ -87,14 +87,14 @@
     }
     .icon-click {
       background-position-x: 6px;
-      background-image: url("../../../assets/img/click.png");
+      background-image: url('../../../assets/img/click.png');
     }
     .icon-time {
-      background-image: url("../../../assets/img/time.png");
+      background-image: url('../../../assets/img/time.png');
     }
     .icon-bombs {
       background-position-x: 4px;
-      background-image: url("../../../assets/img/bomb.png");
+      background-image: url('../../../assets/img/bomb.png');
     }
     .score-text {
       padding-top: 6px;
@@ -102,7 +102,7 @@
       text-align: center;
       width: 2rem;
       padding-top: 6px;
-      font-family: "Josefin Sans";
+      font-family: 'Josefin Sans';
       font-style: normal;
       font-weight: 400;
       font-size: 1rem;
@@ -118,7 +118,7 @@
     outline: none;
   }
   .btn {
-    font-family: "Josefin Sans";
+    font-family: 'Josefin Sans';
     font-style: normal;
     font-weight: 300;
     font-size: 12px;
@@ -142,7 +142,7 @@
   }
   .play {
     padding-top: 6px;
-    font-family: "Josefin Sans";
+    font-family: 'Josefin Sans';
     font-style: normal;
     font-weight: 500;
     font-size: 12px;
