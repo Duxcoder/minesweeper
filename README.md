@@ -1,6 +1,7 @@
 # **Minesweeper**
 
-![minesweeper]()
+<img width="724" alt="image" src="https://github.com/Duxcoder/minesweeper/assets/68332435/bd5041a1-ccdf-4327-bf12-189ff4c0fae8">
+
 
 📋 Task: [Rolling Scopes School](https://github.com/rolling-scopes-school/tasks/blob/master/tasks/minesweeper/README.md)
 
@@ -8,7 +9,7 @@
 
 ## Technology stack
 
-➖ HTML (SEO)
+➖ HTML
 
 ➖ SCSS
 
@@ -25,7 +26,3 @@
 ✅ Game Settings
 
 ✅ The first move is a win-win
-
-## Lighthouse
-
-**Desktop**
